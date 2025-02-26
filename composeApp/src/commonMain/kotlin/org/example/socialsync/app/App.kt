@@ -1,7 +1,8 @@
-package org.example.socialsync
+package org.example.socialsync.app
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import org.example.socialsync.authentication.SignUp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
