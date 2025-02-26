@@ -15,11 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import org.example.socialsync.res.Res
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ConnectSocials() {
+fun ConnectSocials(navController: NavHostController, modifier: Modifier) {
     Scaffold (
         modifier = Modifier
             .fillMaxSize()

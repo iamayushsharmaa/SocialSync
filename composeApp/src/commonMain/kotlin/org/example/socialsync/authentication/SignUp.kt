@@ -1,6 +1,7 @@
 package org.example.socialsync.authentication
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,32 +26,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.Bottom
-import androidx.compose.ui.Alignment.Companion.BottomEnd
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.socialsync.res.Res
+import androidx.navigation.NavHostController
+import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import socialsync.composeapp.generated.resources.Res
+import socialsync.composeapp.generated.resources.already_have_account
+import socialsync.composeapp.generated.resources.confirm_password
+import socialsync.composeapp.generated.resources.create_password
+import socialsync.composeapp.generated.resources.email_address
+import socialsync.composeapp.generated.resources.enter_email
+import socialsync.composeapp.generated.resources.must_be_8_char
+import socialsync.composeapp.generated.resources.repeat_password
+import socialsync.composeapp.generated.resources.sign_in
 
 @Composable
-fun SignUp() {
+fun SignUp(
+    navController: NavHostController,
+    onNavigateToSignIn: () -> Unit,
+    modifier: Modifier = Modifier,
+    onNavigateToHome: () -> Unit
+) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("")  }
+    var isPasswordVisible by remember { mutableStateOf(false) }
 
     Scaffold (
         modifier = Modifier
@@ -81,7 +95,7 @@ fun SignUp() {
                 )
                 Spacer(Modifier.height(5.dp))
                 Text(
-                    text = "Email",
+                    text = stringResource(Res.string.email_address),
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
                     modifier = Modifier
@@ -98,7 +112,7 @@ fun SignUp() {
 
                         ),
                     placeholder = { Text(
-                        text = "Enter your email",
+                        text = stringResource(Res.string.enter_email),
                         color = Color.LightGray,
                         fontSize = 16.sp,
                     ) },
@@ -120,15 +134,15 @@ fun SignUp() {
                     )
                 )
                 Text(
-                    text = "Create a password",
+                    text = stringResource(Res.string.create_password),
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
                     modifier = Modifier
                         .padding(top = 15.dp, bottom = 3.dp)
                 )
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = password,
+                    onValueChange = { password = it },
                     shape = RoundedCornerShape(12.dp),
                     textStyle = TextStyle(
                         color = Color.Black,
@@ -136,17 +150,24 @@ fun SignUp() {
                         fontWeight = FontWeight.Normal,
                         ),
                     placeholder = { Text(
-                        text = "repeat password",
+                        text = stringResource(Res.string.must_be_8_char),
                         color = Color.LightGray,
                         fontSize = 16.sp,
                     ) },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(Res.Icons.EYE_OPEN),
-                            contentDescription = "show password"
+                            painter = painterResource(if (isPasswordVisible) Resource.Icons.EYE_CLOSED else Resource.Icons.EYE_OPEN),
+                            modifier = Modifier
+                                .clickable{
+                                    isPasswordVisible = !isPasswordVisible
+                                },
+                            contentDescription = "icon of eye"
                         )
                     },
-                    visualTransformation = VisualTransformation.None,
+                    visualTransformation = if (isPasswordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(CenterHorizontally)
@@ -165,15 +186,15 @@ fun SignUp() {
                     )
                 )
                 Text(
-                    text = "Confirm password",
+                    text = stringResource(Res.string.confirm_password),
                     fontWeight = FontWeight.Normal,
                     fontSize = 15.sp,
                     modifier = Modifier
                         .padding(top = 15.dp, bottom = 3.dp)
                 )
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = confirmPassword,
+                    onValueChange = { confirmPassword = it },
                     shape = RoundedCornerShape(12.dp),
                     textStyle = TextStyle(
                         color = Color.Black,
@@ -182,17 +203,24 @@ fun SignUp() {
 
                         ),
                     placeholder = { Text(
-                        text = "repeat password",
+                        text = stringResource(Res.string.repeat_password),
                         color = Color.LightGray,
                         fontSize = 16.sp,
                     ) },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(Res.Icons.EYE_OPEN),
-                            contentDescription = "show password"
+                            painter = painterResource(if (isPasswordVisible) Resource.Icons.EYE_CLOSED else Resource.Icons.EYE_OPEN),
+                            modifier = Modifier
+                                .clickable{
+                                    isPasswordVisible = !isPasswordVisible
+                                },
+                            contentDescription = "icon of eye"
                         )
                     },
-                    visualTransformation = VisualTransformation.None,
+                    visualTransformation = if (isPasswordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(CenterHorizontally)
@@ -213,7 +241,7 @@ fun SignUp() {
 
                 Spacer(Modifier.height(20.dp))
                 Button(
-                    onClick = {},
+                    onClick = { onNavigateToHome() },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
@@ -236,11 +264,11 @@ fun SignUp() {
             Spacer(Modifier.weight(1f))
 
             val annotatedText = buildAnnotatedString {
-                append("Already have an account? ")
+                append(stringResource(Res.string.already_have_account))
 
                 pushStringAnnotation(tag = "SIGN_IN", annotation = "sign_in")
                 withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.SemiBold)) {
-                    append("Sign in")
+                    append(stringResource(Res.string.sign_in))
                 }
                 pop()
             }
@@ -260,7 +288,7 @@ fun SignUp() {
                     onClick = { offset ->
                         annotatedText.getStringAnnotations(tag = "SIGN_IN", start = offset, end = offset)
                             .firstOrNull()?.let {
-                                //navController.navigate("signin")
+                                onNavigateToSignIn()
                             }
                     }
                 )

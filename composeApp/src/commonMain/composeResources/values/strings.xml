@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <string name = "get_started">Get Started</string>
+    <string name = "explore_the_app">Explore the app</string>
+    <string name = "now_your_finances_in_one_place">Now your post are in one place and always under control</string>
+
+    <string name = "o_auth">Oauth Sign In</string>
+    <string name = "continue_google">Continue with Google</string>
+    <string name = "continue_email">Continue with Email</string>
+    <string name = "continue_x">Continue with X</string>
+
+
+    <string name = "take_control_social_media">Take control of your social media</string>
     <string name = "sign_up">Sign up</string>
+    <string name = "sign_in">Sign in</string>
+    <string name = "forget_password">Forget password?</string>
+    <string name = "please_enter">Please enter email and password.</string>
+    <string name = "enter_email">Enter your email</string>
+    <string name = "password">Password</string>
+    <string name = "must_be_8_char">must be 8 character</string>
+    <string name = "repeat_password">repeat password</string>
+    <string name = "email_address">Email address</string>
+    <string name = "create_password">Create a password</string>
+    <string name = "confirm_password">Confirm password</string>
+    <string name = "already_have_account">Already have an account?</string>
+    <string name = "dont_have_account">Don't have an account?</string>
+
+    <string name = "connect_social">Connect Your Socials</string>>
+    <string name = "connect_instagram">Connect Instagram</string>
+    <string name = "connect_x">Connect X</string>
+
+
+    <string name = "home">Home</string>
+    <string name="drafts">Drafts</string>
+    <string name="analysis">Analysis</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,18 +35,37 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.socialsync.viewmodel.auth.AuthUiEvent
+import androidx.navigation.NavHostController
+import org.example.socialsync.res.Resource
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import socialsync.composeapp.generated.resources.Res
+import socialsync.composeapp.generated.resources.create_password
+import socialsync.composeapp.generated.resources.dont_have_account
+import socialsync.composeapp.generated.resources.email_address
+import socialsync.composeapp.generated.resources.enter_email
+import socialsync.composeapp.generated.resources.enter_password
+import socialsync.composeapp.generated.resources.forget_password
+import socialsync.composeapp.generated.resources.sign_in
+import socialsync.composeapp.generated.resources.sign_up
 
 @Composable
-fun SignIn() {
+fun SignIn(
+    navController: NavHostController,
+    onNavigateToSignUp: () -> Unit,
+    modifier: Modifier = Modifier,
+    onNavigateToHome: () -> Unit
+) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var isPasswordVisible by remember { mutableStateOf(false) }
+
 
     Scaffold (
         modifier = Modifier
@@ -67,7 +87,7 @@ fun SignIn() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Sign in",
+                    text = stringResource(Res.string.sign_in),
                     fontFamily = FontFamily.Serif,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 32.sp,
@@ -76,7 +96,7 @@ fun SignIn() {
                 )
                 Spacer(Modifier.height(5.dp))
                 Text(
-                    text = "Email address",
+                    text = stringResource(Res.string.email_address),
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -94,7 +114,7 @@ fun SignIn() {
                         ),
                     placeholder = {
                         Text(
-                            text = "Enter your email",
+                            text = stringResource(Res.string.enter_email),
                             color = Color.LightGray,
                             fontSize = 16.sp,
                         )
@@ -117,7 +137,7 @@ fun SignIn() {
                     )
                 )
                 Text(
-                    text = "Password",
+                    text = stringResource(Res.string.create_password),
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -134,12 +154,25 @@ fun SignIn() {
                     ),
                     placeholder = {
                         Text(
-                            text = "Enter your password",
+                            text = stringResource(Res.string.enter_password),
                             color = Color.LightGray,
                             fontSize = 16.sp,
                         )
                     },
-                    visualTransformation = VisualTransformation.None,
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(if (isPasswordVisible) Resource.Icons.EYE_CLOSED else Resource.Icons.EYE_OPEN),
+                            modifier = Modifier
+                                .clickable{
+                                    isPasswordVisible = !isPasswordVisible
+                                },
+                            contentDescription = "icon of eye"
+                        )
+                    },
+                    visualTransformation = if (isPasswordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(CenterHorizontally)
@@ -158,7 +191,7 @@ fun SignIn() {
                     )
                 )
                 Text(
-                    text = "Forget password?",
+                    text = stringResource(Res.string.forget_password),
                     fontSize = 16.sp,
                     modifier = Modifier
                         .align(End)
@@ -168,7 +201,9 @@ fun SignIn() {
                 )
                 Spacer(Modifier.height(20.dp))
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onNavigateToHome()
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
@@ -182,7 +217,7 @@ fun SignIn() {
                     ),
                 ) {
                     Text(
-                        text = "Sign in",
+                        text = stringResource(Res.string.sign_in),
                         fontSize = 18.sp
                     )
                 }
@@ -191,11 +226,11 @@ fun SignIn() {
             Spacer(Modifier.weight(1f))
 
             val annotatedText = buildAnnotatedString {
-                append("Don't have an account? ")
+                append(stringResource(Res.string.dont_have_account))
 
                 pushStringAnnotation(tag = "SIGN_IN", annotation = "sign_in")
                 withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.SemiBold)) {
-                    append("Sign up")
+                    append(stringResource(Res.string.sign_up))
                 }
                 pop()
             }
@@ -219,7 +254,7 @@ fun SignIn() {
                             end = offset
                         )
                             .firstOrNull()?.let {
-                                //navController.navigate("signin")
+                                onNavigateToSignUp()
                             }
                     }
                 )
