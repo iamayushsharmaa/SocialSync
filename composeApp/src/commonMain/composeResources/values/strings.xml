@@ -25,7 +25,8 @@
     <string name = "already_have_account">Already have an account?</string>
     <string name = "dont_have_account">Don't have an account?</string>
 
-    <string name = "connect_social">Connect Your Socials</string>>
+    <string name = "connect_socials">Connect Socials</string>>
+    <string name = "connect_your_socials">Connect Your Socials</string>>
     <string name = "connect_instagram">Connect Instagram</string>
     <string name = "connect_x">Connect X</string>
 

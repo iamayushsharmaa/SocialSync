@@ -1,5 +1,6 @@
 package org.example.socialsync.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -8,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -21,7 +23,7 @@ import org.example.socialsync.presentation.socials.ConnectSocials
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import socialsync.composeapp.generated.resources.Res
-import socialsync.composeapp.generated.resources.connect_social
+import socialsync.composeapp.generated.resources.connect_socials
 import socialsync.composeapp.generated.resources.home
 import socialsync.composeapp.generated.resources.o_auth
 import socialsync.composeapp.generated.resources.sign_in
@@ -33,7 +35,7 @@ enum class SocialScreen(val title: StringResource) {
     SignUp(title = Res.string.sign_up),
     SignIn(title = Res.string.sign_in),
     Home(title = Res.string.home),
-    ConnectSocial(title = Res.string.connect_social)
+    ConnectSocial(title = Res.string.connect_socials)
 }
 
 @Composable
@@ -47,14 +49,17 @@ fun SocialApp(
         backStackEntry?.destination?.route ?: SocialScreen.SignUp.name
     )
 
-    Scaffold() { innerPadding ->
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) { innerPadding ->
 
         NavHost(
             navController = navController,
             startDestination = SocialScreen.SignUp.name,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
             composable(route = SocialScreen.OauthSignIn.name){
@@ -82,7 +87,7 @@ fun SocialApp(
                         navController.navigate(SocialScreen.SignIn.name)
                     },
                     onNavigateToHome = {
-                        navController.navigate(SocialScreen.Home.name)
+                        navController.navigate(SocialScreen.OauthSignIn.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -96,7 +101,7 @@ fun SocialApp(
                         navController.navigate(SocialScreen.SignUp.name)
                     },
                     onNavigateToHome = {
-                        navController.navigate(SocialScreen.Home.name)
+                        navController.navigate(SocialScreen.ConnectSocial.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()

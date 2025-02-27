@@ -2,7 +2,6 @@ package org.example.socialsync.authentication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Icon
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,14 +59,14 @@ fun OauthSignIn(
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = CenterHorizontally
+            .statusBarsPadding()
+            .background(color = Color.White)
     ){
         Spacer(Modifier.weight(1f))
+
         OauthBoxDesign(
             modifier = Modifier
-                .fillMaxWidth(),
+                .padding(16.dp),
             onGoogleClick = {
                 onGoogleClick()
             },
@@ -74,6 +77,7 @@ fun OauthSignIn(
                 onEmailClick()
             }
         )
+
         Spacer(Modifier.weight(1f))
 
         val annotatedText = buildAnnotatedString {
@@ -118,12 +122,14 @@ fun OauthBoxDesign(
 ) {
     Column (
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .height(640.dp)
             .padding(16.dp)
-            .background(shape = RoundedCornerShape(18.dp), color = Color.Black),
+            .background(shape = RoundedCornerShape(22.dp), color = Color.Black),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = CenterHorizontally
     ){
+        Spacer(Modifier.weight(1f))
         Text(
             text = stringResource(Res.string.explore_the_app),
             fontSize = 24.sp,
@@ -137,41 +143,45 @@ fun OauthBoxDesign(
             text = stringResource(Res.string.now_your_finances_in_one_place),
             fontSize = 18.sp,
             fontWeight = FontWeight.Normal,
-            color = Color.DarkGray,
+            color = Color.White,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(8.dp)
         )
+        Spacer(Modifier.height(20.dp))
+        OauthButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            icon = Resource.Icons.GOOGLE,
+            text = Res.string.continue_google,
+            onClick = {
+                onGoogleClick()
+            }
+        )
+        OauthButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            icon = Resource.Icons.X,
+            text = Res.string.continue_x,
+            onClick = {
+                onXClick()
+            }
+        )
+        OauthButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            icon = Resource.Icons.EMAIL,
+            text = Res.string.continue_email,
+            onClick = {
+                onEmailClick()
+            }
+        )
 
-//        OauthButton(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 8.dp, vertical = 5.dp),
-//            icon = Resource.Icons.GOOGLE,
-//            text = Res.string.continue_google,
-//            onClick = {
-//                onGoogleClick()
-//            }
-//        )
-//        OauthButton(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 8.dp, vertical = 5.dp),
-//            icon = Resource.Icons.APPLE,
-//            text = Res.string.continue_x,
-//            onClick = {
-//                onXClick()
-//            }
-//        )
-//        OauthButton(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 8.dp, vertical = 5.dp),
-//            icon = Resource.Icons.EMAIL,
-//            text = Res.string.continue_email,
-//            onClick = {
-//                onEmailClick()
-//            }
-//        )
+        Spacer(Modifier.height(16.dp))
+
     }
 }
 
@@ -185,20 +195,29 @@ fun OauthButton(
     Row (
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(60.dp)
+            .padding(horizontal = 12.dp, vertical = 8.dp)
             .clickable{
                 onClick()
             }
-            .background(shape = RoundedCornerShape(24.dp), color = Color.White),
+            .background(shape = RoundedCornerShape(18.dp), color = Color.White),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.Center
     ){
         Icon(
             painter = painterResource(icon),
+            tint = Color.Unspecified,
+            modifier = Modifier.size(28.dp),
             contentDescription = "icon of social"
         )
+
+        Spacer(Modifier.width(16.dp))
+
         Text(
-            text = stringResource(text)
+            text = stringResource(text),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Black
         )
     }
 }
