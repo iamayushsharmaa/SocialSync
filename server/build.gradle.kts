@@ -29,7 +29,7 @@ dependencies {
     implementation(libs.bson)
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.server.auth.jwt)
-    implementation(libs.logback.classic)
+    implementation(libs.logback)
     implementation(libs.bson.kotlinx)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.mongodb.driver.kotlin.coroutine)

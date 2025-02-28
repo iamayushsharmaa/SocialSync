@@ -7,20 +7,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.sqldelight)
-
 }
 
 kotlin {
     tasks.create("testClasses")
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-    
+//    androidTarget {
+//        compilerOptions {
+//            jvmTarget.set(JvmTarget.JVM_11)
+//        }
+//    }
+//
     listOf(
         iosX64(),
         iosArm64(),
@@ -42,9 +38,6 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation (libs.koin.androidx.compose)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.android)
-            implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.android.driver)
         }
@@ -58,10 +51,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.ktor.client.core)
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.navigation.compose)
         }
@@ -71,7 +60,6 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.ktor.client.okhttp)
         }
     }
 }
