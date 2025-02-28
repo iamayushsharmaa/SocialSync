@@ -1,4 +1,4 @@
-package org.example.socialsync.viewmodel.auth
+package org.example.socialsync.presentation.auth
 
 data class AuthState(
     val isLoading: Boolean = false,

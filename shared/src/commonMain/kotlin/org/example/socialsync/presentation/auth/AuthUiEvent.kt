@@ -1,4 +1,4 @@
-package org.example.socialsync.viewmodel.auth
+package org.example.socialsync.presentation.auth
 
 sealed class AuthUiEvent {
     data class SignUpUsernameChanged(val value: String): AuthUiEvent()

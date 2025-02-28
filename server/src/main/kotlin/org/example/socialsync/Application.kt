@@ -41,8 +41,6 @@ fun Application.module() {
         expiresIn = 365L * 1000L * 60L * 60L * 24L,
         secret = System.getenv("JWT_SECRET")
     )
-
-
     val hashingService = SHA256HashingServiceImpl()
 
     configureSerialization()
