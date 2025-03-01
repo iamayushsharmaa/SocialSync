@@ -1,0 +1,8 @@
+package org.example.socialsync.data.auth.model
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Token(
+    val token: String
+)
