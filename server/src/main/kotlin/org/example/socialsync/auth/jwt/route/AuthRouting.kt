@@ -1,33 +1,24 @@
 package org.example.socialsync.auth.jwt.route
 
 
-import io.ktor.client.HttpClient
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.auth.OAuthAccessTokenResponse
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.principal
 import io.ktor.server.request.receiveNullable
 import io.ktor.server.response.respond
-import io.ktor.server.response.respondRedirect
-import io.ktor.server.response.respondText
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
-import io.ktor.server.sessions.sessions
-import io.ktor.server.sessions.set
 import org.example.socialsync.auth.jwt.models.AuthRequest
 import org.example.socialsync.auth.jwt.models.AuthResponse
 import org.example.socialsync.auth.jwt.models.User
 import org.example.socialsync.auth.jwt.repository.UserDataSource
-import org.example.socialsync.auth.oauth.model.UserInfo
-import org.example.socialsync.auth.oauth.model.UserSession
 import org.example.socialsync.auth.jwt.security.hashing.HashingService
 import org.example.socialsync.auth.jwt.security.hashing.SaltedHash
 import org.example.socialsync.auth.jwt.security.token.TokenClaim
 import org.example.socialsync.auth.jwt.security.token.TokenConfig
 import org.example.socialsync.auth.jwt.security.token.TokenService
-
 
 
 fun Route.signUp(
