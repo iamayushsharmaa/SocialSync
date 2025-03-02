@@ -1,4 +1,4 @@
-package org.example.socialsync.auth.security.hashing
+package org.example.socialsync.auth.jwt.security.hashing
 
 import org.apache.commons.codec.binary.Hex
 import org.apache.commons.codec.digest.DigestUtils

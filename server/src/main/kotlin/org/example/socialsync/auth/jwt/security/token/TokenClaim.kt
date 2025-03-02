@@ -1,4 +1,4 @@
-package org.example.socialsync.auth.security.token
+package org.example.socialsync.auth.jwt.security.token
 
 data class TokenClaim (
     val name: String,

@@ -1,6 +1,6 @@
-package org.example.socialsync.auth.data.repository
+package org.example.socialsync.auth.jwt.repository
 
-import org.example.socialsync.auth.data.models.User
+import org.example.socialsync.auth.jwt.models.User
 
 interface UserDataSource{
     suspend fun getUserByUsername(username : String) : User?

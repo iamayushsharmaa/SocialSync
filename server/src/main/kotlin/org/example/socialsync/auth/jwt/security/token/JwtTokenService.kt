@@ -1,4 +1,4 @@
-package org.example.socialsync.auth.security.token
+package org.example.socialsync.auth.jwt.security.token
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm

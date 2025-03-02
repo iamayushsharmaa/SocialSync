@@ -6,9 +6,16 @@ import com.mongodb.MongoClientSettings
 import com.mongodb.ServerApi
 import com.mongodb.ServerApiVersion
 import com.mongodb.kotlin.client.coroutine.MongoClient
-import org.example.socialsync.auth.data.repository.UserDataSource
-import org.example.socialsync.auth.data.repository.UserDataSourceImpl
+import org.example.socialsync.auth.jwt.repository.UserDataSource
+import org.example.socialsync.auth.jwt.repository.UserDataSourceImpl
+import org.example.socialsync.auth.jwt.security.hashing.HashingService
+import org.example.socialsync.auth.jwt.security.hashing.SHA256HashingServiceImpl
+import org.example.socialsync.auth.jwt.security.token.JwtTokenService
+import org.example.socialsync.auth.jwt.security.token.TokenService
+import org.example.socialsync.auth.oauth.repository.OAuthSession
+import org.example.socialsync.auth.oauth.repository.OAuthSessionImpl
 import org.koin.dsl.module
+import kotlin.math.sin
 
 val mainModule = module {
     single<MongoClient> {
@@ -29,5 +36,14 @@ val mainModule = module {
     }
     single<UserDataSource> {
         UserDataSourceImpl(get())
+    }
+    single<TokenService> {
+        JwtTokenService()
+    }
+    single<HashingService> {
+        SHA256HashingServiceImpl()
+    }
+    single <OAuthSession>{
+        OAuthSessionImpl()
     }
 }

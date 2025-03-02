@@ -1,10 +1,10 @@
-package org.example.socialsync.auth.data.repository
+package org.example.socialsync.auth.jwt.repository
 
 import com.mongodb.client.model.Filters
 import com.mongodb.kotlin.client.coroutine.MongoDatabase
 import kotlinx.coroutines.flow.firstOrNull
 import org.bson.conversions.Bson
-import org.example.socialsync.auth.data.models.User
+import org.example.socialsync.auth.jwt.models.User
 
 class UserDataSourceImpl(
     database : MongoDatabase

@@ -34,4 +34,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.mongodb.driver.kotlin.coroutine)
     implementation(libs.commons.codec)
+    implementation(libs.ktor.server.auth)
+
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
 }
