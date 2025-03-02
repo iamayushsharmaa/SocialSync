@@ -25,9 +25,10 @@ kotlin {
 
 
         commonMain.dependencies {
-
             implementation(libs.koin.android)
             implementation (libs.koin.androidx.compose)
+            implementation (libs.kotlinx.coroutines.core)
+            implementation (libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.client.okhttp)
@@ -36,6 +37,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.darwin)
+            implementation( libs.androidx.lifecycle.runtime.ktx)
         }
     }
 }
