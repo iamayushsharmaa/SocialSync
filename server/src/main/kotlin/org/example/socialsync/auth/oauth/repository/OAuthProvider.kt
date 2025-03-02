@@ -47,27 +47,3 @@ fun AuthenticationConfig.configureGoogleOAuth(
         client = httpClient
     }
 }
-
-private suspend fun getPersonalGreeting(
-    httpClient: HttpClient,
-    userSession: UserSession
-): UserInfo = httpClient.get("https://www.googleapis.com/oauth2/v2/userinfo") {
-    headers {
-        append(HttpHeaders.Authorization, "Bearer ${userSession.token}")
-    }
-}.body()
-
-private suspend fun getSession(
-    call: ApplicationCall
-): UserSession? {
-    val userSession: UserSession? = call.sessions.get()
-    if (userSession == null) {
-        val redirectUrl = URLBuilder("http://0.0.0.0:8080/login").run {
-            parameters.append("redirectUrl", call.request.uri)
-            build()
-        }
-        call.respondRedirect(redirectUrl)
-        return null
-    }
-    return userSession
-}
