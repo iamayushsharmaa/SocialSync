@@ -23,56 +23,30 @@ import kotlinx.serialization.json.Json
 
 
 object HttpClientFactory{
-
     fun create(engine: HttpClientEngine): HttpClient{
-        return HttpClient(engine){
-            install(Logging){
-                logger = object : Logger{
+        return HttpClient(engine) {
+            install(Logging) {
+                logger = object : Logger {
                     override fun log(message: String) {
                         println(message)
                     }
                 }
                 level = LogLevel.ALL
             }
-            install(ContentNegotiation){
+            install(ContentNegotiation) {
                 json(
                     json = Json {
                         ignoreUnknownKeys = true
                     }
                 )
             }
-            install(HttpTimeout){
+            install(HttpTimeout) {
                 socketTimeoutMillis = 20_000L
                 connectTimeoutMillis = 20_000L
                 requestTimeoutMillis = 20_000L
             }
             defaultRequest {
                 contentType(ContentType.Application.Json)
-            }
-
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        BearerTokens(
-                            accessToken = "stored_access_token",
-                            refreshToken = "stored_refresh_token"
-                        )
-                    }
-
-//                    refreshTokens {
-//                        // Logic to refresh token when expired
-//                        val refreshToken = oldTokens?.refreshToken ?: return@refreshTokens null
-//                        val response = client.post("https://api.example.com/refresh") {
-//                            contentType(ContentType.Application.Json)
-//                            setBody(mapOf("refresh_token" to refreshToken))
-//                        }.body<TokenResponse>()
-//
-//                        BearerTokens(
-//                            accessToken = response.accessToken,
-//                            refreshToken = response.refreshToken
-//                        )
-//                    }
-                }
             }
         }
     }
