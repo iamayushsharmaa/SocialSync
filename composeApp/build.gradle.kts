@@ -52,6 +52,12 @@ kotlin {
             implementation(projects.shared)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.navigation.compose)
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.compose.viewmodel.navigation)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -91,6 +97,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.activity.ktx)
     debugImplementation(compose.uiTooling)
 }
 

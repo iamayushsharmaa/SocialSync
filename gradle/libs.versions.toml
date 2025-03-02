@@ -15,7 +15,7 @@ bsonKotlinx = "5.3.0"
 commonsCodec = "1.18.0"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
-koinKtor = "4.0.2"
+koin = "4.0.2"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
 kotlinxSerializationJson = "1.8.0"
@@ -26,6 +26,7 @@ coroutines = "1.10.1"
 navigationCompose = "2.8.0-alpha10"
 sqlDelight = "2.0.1"
 mongo-version = "5.3.0"
+activityKtx = "1.10.1"
 
 
 [libraries]
@@ -33,6 +34,9 @@ android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = 
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 bson-kotlinx = { module = "org.mongodb:bson-kotlinx", version.ref = "bsonKotlinx" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commonsCodec" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -41,11 +45,11 @@ mongodb-driver-kotlin-coroutine = { module = "org.mongodb:mongodb-driver-kotlin-
 native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinKtor" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinKtor" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinKtor" }
-koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtor" }
-koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koinKtor" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -81,6 +85,7 @@ mongodb-driver-sync = { module = "org.mongodb:mongodb-driver-sync", version.ref 
 bson = { module = "org.mongodb:bson", version.ref = "mongo-version" }
 ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
 ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

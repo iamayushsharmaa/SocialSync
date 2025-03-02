@@ -42,9 +42,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.example.socialsync.data.auth.presentaion.AuthViewModel
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import socialsync.composeapp.generated.resources.Res
 import socialsync.composeapp.generated.resources.create_password
 import socialsync.composeapp.generated.resources.dont_have_account
@@ -62,6 +64,8 @@ fun SignIn(
     modifier: Modifier = Modifier,
     onNavigateToHome: () -> Unit
 ) {
+
+    val viewModel = koinViewModel<AuthViewModel>()
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
