@@ -10,8 +10,8 @@ import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.sessions.sessions
 import io.ktor.server.sessions.set
-import org.example.socialsync.auth.oauth.model.UserInfo
-import org.example.socialsync.auth.oauth.model.UserSession
+import org.example.socialsync.auth.oauth.data.UserInfo
+import org.example.socialsync.auth.oauth.data.UserSession
 import org.example.socialsync.auth.oauth.repository.GoogleOAuthSession
 
 fun Route.oAuth(

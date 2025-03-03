@@ -1,4 +1,4 @@
-package org.example.socialsync.auth.oauth.model
+package org.example.socialsync.auth.oauth.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

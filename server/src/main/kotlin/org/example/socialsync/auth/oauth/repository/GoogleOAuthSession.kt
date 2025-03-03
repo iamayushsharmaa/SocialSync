@@ -2,8 +2,8 @@ package org.example.socialsync.auth.oauth.repository
 
 import io.ktor.client.HttpClient
 import io.ktor.server.application.ApplicationCall
-import org.example.socialsync.auth.oauth.model.UserInfo
-import org.example.socialsync.auth.oauth.model.UserSession
+import org.example.socialsync.auth.oauth.data.UserInfo
+import org.example.socialsync.auth.oauth.data.UserSession
 
 
 interface GoogleOAuthSession {

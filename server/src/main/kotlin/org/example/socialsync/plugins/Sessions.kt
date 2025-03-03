@@ -2,7 +2,7 @@ package org.example.socialsync.plugins
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
-import org.example.socialsync.auth.oauth.model.UserSession
+import org.example.socialsync.auth.oauth.data.UserSession
 import io.ktor.server.sessions.*
 
 fun Application.configureSessions() {

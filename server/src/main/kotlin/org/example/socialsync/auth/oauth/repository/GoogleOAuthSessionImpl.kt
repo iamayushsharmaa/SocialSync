@@ -11,8 +11,8 @@ import io.ktor.server.request.uri
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.sessions.get
 import io.ktor.server.sessions.sessions
-import org.example.socialsync.auth.oauth.model.UserInfo
-import org.example.socialsync.auth.oauth.model.UserSession
+import org.example.socialsync.auth.oauth.data.UserInfo
+import org.example.socialsync.auth.oauth.data.UserSession
 
 
 class GoogleOAuthSessionImpl: GoogleOAuthSession {
