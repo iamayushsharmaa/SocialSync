@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
     application
-    alias(libs.plugins.kotlinxSerialization)
-
 }
 
 group = "org.example.socialsync"
@@ -35,7 +33,7 @@ dependencies {
     implementation(libs.mongodb.driver.kotlin.coroutine)
     implementation(libs.commons.codec)
     implementation(libs.ktor.server.auth)
-
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
+    testImplementation (libs.ktor.server.test.host.jvm)
 }

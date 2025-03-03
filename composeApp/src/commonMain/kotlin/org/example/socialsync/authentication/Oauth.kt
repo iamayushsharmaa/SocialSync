@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package org.example.socialsync.authentication
 
 import androidx.compose.foundation.background

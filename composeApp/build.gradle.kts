@@ -11,12 +11,12 @@ plugins {
 
 kotlin {
     tasks.create("testClasses")
-//    androidTarget {
-//        compilerOptions {
-//            jvmTarget.set(JvmTarget.JVM_11)
-//        }
-//    }
-//
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,21 +27,23 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm("desktop")
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.androidx.navigation.compose)
             implementation(libs.kotlinx.coroutines.android)
-            implementation(libs.android.driver)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
+            implementation(libs.material)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
@@ -52,11 +54,12 @@ kotlin {
             implementation(projects.shared)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.navigation.compose)
-
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.navigation)
+            implementation(libs.navigation.compose)
+
 
         }
         commonTest.dependencies {
@@ -91,13 +94,13 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.ui.text.android)
     debugImplementation(compose.uiTooling)
 }
 

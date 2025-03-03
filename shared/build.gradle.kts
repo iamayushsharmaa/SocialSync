@@ -11,7 +11,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
     
@@ -22,22 +22,40 @@ kotlin {
     jvm()
     
     sourceSets {
-
-
-        commonMain.dependencies {
+        androidMain.dependencies {
             implementation(libs.koin.android)
             implementation (libs.koin.androidx.compose)
-            implementation (libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.android)
+            implementation( libs.androidx.lifecycle.runtime.ktx)
             implementation (libs.kotlinx.coroutines.android)
+            implementation(libs.ktor.client.okhttp)
+
+        }
+        commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.auth)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.ktor.client.android)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.darwin)
-            implementation( libs.androidx.lifecycle.runtime.ktx)
+
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.navigation.compose)
+
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.navigation.compose)
+
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+            }
         }
     }
 }
@@ -46,8 +64,8 @@ android {
     namespace = "org.example.socialsync.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

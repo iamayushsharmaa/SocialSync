@@ -1,12 +1,16 @@
 package org.example.socialsync.res
 
 import socialsync.composeapp.generated.resources.Res
+import socialsync.composeapp.generated.resources.add_blank
+import socialsync.composeapp.generated.resources.add_filled
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.email_icon
 import socialsync.composeapp.generated.resources.eye_closed
 import socialsync.composeapp.generated.resources.eye_open
 import socialsync.composeapp.generated.resources.fb_icon
 import socialsync.composeapp.generated.resources.google_icon
+import socialsync.composeapp.generated.resources.house_blank
+import socialsync.composeapp.generated.resources.house_filled
 import socialsync.composeapp.generated.resources.insta_icon
 import socialsync.composeapp.generated.resources.x_icon
 
@@ -20,5 +24,10 @@ object Resource {
         val EMAIL = Res.drawable.email_icon
         val INSTAGRAM = Res.drawable.insta_icon
         val BACK_ICON = Res.drawable.back_iconn
+
+        val HOUSE_BLANK = Res.drawable.house_blank
+        val HOUSE_FILLED = Res.drawable.house_filled
+        val ADD_BLANK = Res.drawable.add_blank
+        val ADD_FILLED = Res.drawable.add_filled
     }
 }

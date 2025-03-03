@@ -32,7 +32,7 @@ enum class SocialScreen(val title: StringResource) {
     OauthSignIn(title = Res.string.o_auth),
     SignUp(title = Res.string.sign_up),
     SignIn(title = Res.string.sign_in),
-    Home(title = Res.string.home),
+    MainScreen(title = Res.string.home),
     ConnectSocial(title = Res.string.connect_socials)
 }
 
@@ -114,7 +114,7 @@ fun SocialApp(
                         .padding(16.dp)
                 )
             }
-            composable(route = SocialScreen.Home.name){
+            composable(route = SocialScreen.MainScreen.name){
 //                Home(
 //                    navController = navController,
 //                    modifier = Modifier
