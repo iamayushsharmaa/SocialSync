@@ -12,10 +12,9 @@ import org.example.socialsync.auth.jwt.security.hashing.HashingService
 import org.example.socialsync.auth.jwt.security.hashing.SHA256HashingServiceImpl
 import org.example.socialsync.auth.jwt.security.token.JwtTokenService
 import org.example.socialsync.auth.jwt.security.token.TokenService
-import org.example.socialsync.auth.oauth.repository.OAuthSession
-import org.example.socialsync.auth.oauth.repository.OAuthSessionImpl
+import org.example.socialsync.auth.oauth.repository.GoogleOAuthSession
+import org.example.socialsync.auth.oauth.repository.GoogleOAuthSessionImpl
 import org.koin.dsl.module
-import kotlin.math.sin
 
 val mainModule = module {
     single<MongoClient> {
@@ -43,7 +42,7 @@ val mainModule = module {
     single<HashingService> {
         SHA256HashingServiceImpl()
     }
-    single <OAuthSession>{
-        OAuthSessionImpl()
+    single <GoogleOAuthSession>{
+        GoogleOAuthSessionImpl()
     }
 }

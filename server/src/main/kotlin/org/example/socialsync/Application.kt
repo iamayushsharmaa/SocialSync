@@ -10,11 +10,9 @@ import io.ktor.server.netty.*
 import org.example.socialsync.app.SERVER_PORT
 import org.example.socialsync.auth.jwt.repository.UserDataSource
 import org.example.socialsync.auth.jwt.security.hashing.HashingService
-import org.example.socialsync.auth.jwt.security.hashing.SHA256HashingServiceImpl
-import org.example.socialsync.auth.jwt.security.token.JwtTokenService
 import org.example.socialsync.auth.jwt.security.token.TokenConfig
 import org.example.socialsync.auth.jwt.security.token.TokenService
-import org.example.socialsync.auth.oauth.repository.OAuthSession
+import org.example.socialsync.auth.oauth.repository.GoogleOAuthSession
 import org.example.socialsync.di.mainModule
 import org.example.socialsync.plugins.configureMonitoring
 import org.example.socialsync.plugins.configureRouting
@@ -53,7 +51,7 @@ fun Application.module(httpClient: HttpClient = applicationHttpClient) {
     )
     val hashingService by inject<HashingService>()
 
-    val oAuthSessions by inject<OAuthSession>()
+    val oAuthSessions by inject<GoogleOAuthSession>()
     val redirects = mutableMapOf<String, String>()
 
     configureSecurity(tokenConfig, httpClient, redirects)

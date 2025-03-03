@@ -13,7 +13,7 @@ import org.example.socialsync.auth.jwt.route.signUp
 import org.example.socialsync.auth.jwt.security.hashing.HashingService
 import org.example.socialsync.auth.jwt.security.token.TokenConfig
 import org.example.socialsync.auth.jwt.security.token.TokenService
-import org.example.socialsync.auth.oauth.repository.OAuthSession
+import org.example.socialsync.auth.oauth.repository.GoogleOAuthSession
 import org.example.socialsync.auth.oauth.routes.oAuth
 
 fun Application.configureRouting(
@@ -23,7 +23,7 @@ fun Application.configureRouting(
     tokenConfig: TokenConfig,
     httpClient: HttpClient,
     redirects: MutableMap<String, String>,
-    oAuthSessions: OAuthSession
+    oAuthSessions: GoogleOAuthSession
 ) {
     routing {
         signUp(hashingService,userDataSource)

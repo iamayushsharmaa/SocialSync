@@ -15,7 +15,7 @@ import org.example.socialsync.auth.oauth.model.UserInfo
 import org.example.socialsync.auth.oauth.model.UserSession
 
 
-class OAuthSessionImpl: OAuthSession {
+class GoogleOAuthSessionImpl: GoogleOAuthSession {
 
      override suspend fun getPersonalGreeting(
         httpClient: HttpClient,

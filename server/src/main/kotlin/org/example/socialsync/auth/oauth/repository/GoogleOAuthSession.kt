@@ -6,7 +6,7 @@ import org.example.socialsync.auth.oauth.model.UserInfo
 import org.example.socialsync.auth.oauth.model.UserSession
 
 
-interface OAuthSession {
+interface GoogleOAuthSession {
 
     suspend fun getPersonalGreeting(
         httpClient: HttpClient,

@@ -12,12 +12,12 @@ import io.ktor.server.sessions.sessions
 import io.ktor.server.sessions.set
 import org.example.socialsync.auth.oauth.model.UserInfo
 import org.example.socialsync.auth.oauth.model.UserSession
-import org.example.socialsync.auth.oauth.repository.OAuthSession
+import org.example.socialsync.auth.oauth.repository.GoogleOAuthSession
 
 fun Route.oAuth(
     httpClient: HttpClient,
     redirects: MutableMap<String, String>,
-    oAuthSessions: OAuthSession
+    oAuthSessions: GoogleOAuthSession
 ){
     authenticate {
         get("login") {
