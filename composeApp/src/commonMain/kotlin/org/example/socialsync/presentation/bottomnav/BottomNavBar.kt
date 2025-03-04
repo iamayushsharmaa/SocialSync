@@ -20,7 +20,9 @@ fun BottomNavBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.AddHabit,
-       // BottomNavItem.Profile
+        BottomNavItem.Draft,
+        BottomNavItem.Analysis,
+        BottomNavItem.Settings
     )
 
     BottomNavigation(
@@ -46,9 +48,9 @@ fun BottomNavBar(navController: NavHostController) {
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
+//                        popUpTo(navController.graph.findStartDestination().id) {
+//                            saveState = true
+//                        }
                         launchSingleTop = true
                         restoreState = true
                     }

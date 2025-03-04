@@ -34,5 +34,5 @@
     <string name = "home">Home</string>
     <string name="drafts">Drafts</string>
     <string name="analysis">Analysis</string>
-    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 </resources>

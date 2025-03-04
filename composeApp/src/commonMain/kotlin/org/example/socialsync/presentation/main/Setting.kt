@@ -1,9 +1,9 @@
 package org.example.socialsync.presentation.main
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.font.FontVariation
+import androidx.navigation.NavHostController
 
 @Composable
-fun Setting() {
+fun Setting(navController: NavHostController) {
 
 }
