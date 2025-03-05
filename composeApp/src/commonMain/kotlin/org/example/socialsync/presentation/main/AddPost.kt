@@ -70,9 +70,9 @@ fun AddPost(navController: NavHostController) {
         AttachmentRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .height(60.dp)
                 .padding(horizontal = 16.dp, vertical = 6.dp)
-                .background(shape = RoundedCornerShape(24.dp), color = AppColor.WhiteFade)
+                .background(shape = RoundedCornerShape(20.dp), color = AppColor.WhiteFade)
         )
 
     }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
 
@@ -26,7 +27,7 @@ fun AttachmentRow(
 ) {
     Row(
         modifier = modifier
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 18.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = CenterVertically
     ) {
@@ -35,17 +36,17 @@ fun AttachmentRow(
             verticalAlignment = CenterVertically
         ) {
             Icon(
-                painter = painterResource( Resource.Icons.EMAIL), // Example icon (e.g., image attachment)
+                painter = painterResource( Resource.Icons.EMAIL),
                 contentDescription = "Image",
-                tint = Color(0xFF657786), // Twitter-like gray
-                modifier = Modifier.size(24.dp) // Icon size
+                tint = AppColor.Black,
+                modifier = Modifier.size(24.dp)
             )
             Spacer(Modifier.width(8.dp))
             Text(
                 text = "Attach",
                 fontSize = 12.sp,
-                color = Color(0xFF657786),
-                modifier = Modifier.padding(top = 4.dp) // Space between icon and text
+                color = AppColor.Black,
+                modifier = Modifier.padding(top = 4.dp)
             )
         }
 
@@ -53,9 +54,9 @@ fun AttachmentRow(
             verticalAlignment = CenterVertically
         ) {
             Icon(
-                painter = painterResource(Resource.Icons.GOOGLE), // Example icon (e.g., file attachment)
+                painter = painterResource(Resource.Icons.GOOGLE),
                 contentDescription = "File",
-                tint = Color(0xFF657786),
+                tint = AppColor.Black,
                 modifier = Modifier.size(24.dp)
             )
             Spacer(Modifier.width(8.dp))
@@ -63,7 +64,7 @@ fun AttachmentRow(
             Text(
                 text = "File",
                 fontSize = 12.sp,
-                color = Color(0xFF657786),
+                color = AppColor.Black,
                 modifier = Modifier.padding(top = 4.dp)
             )
         }
@@ -74,7 +75,7 @@ fun AttachmentRow(
             Icon(
                 painter = painterResource(Resource.Icons.BACK_ICON),
                 contentDescription = "Location",
-                tint = Color(0xFF657786),
+                tint = AppColor.Black,
                 modifier = Modifier.size(24.dp)
             )
             Spacer(Modifier.width(8.dp))
@@ -82,8 +83,8 @@ fun AttachmentRow(
             Text(
                 text = "Tag",
                 fontSize = 12.sp,
-                color = Color(0xFF657786),
-                modifier = Modifier.padding(top = 4.dp)
+                color = AppColor.Black,
+                modifier = Modifier.padding(start = 4.dp)
             )
         }
     }
