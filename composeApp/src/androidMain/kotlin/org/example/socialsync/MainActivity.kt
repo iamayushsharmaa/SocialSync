@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import org.example.socialsync.app.App
 import org.example.socialsync.di.initKoin
+import org.example.socialsync.presentation.main.AddPost
 import org.example.socialsync.presentation.main.Home
 import org.example.socialsync.presentation.main.component.ScheduledPostDesign
 
@@ -26,6 +27,6 @@ class MainActivity : ComponentActivity() {
 private fun HomePrev() {
     //Home(navController = rememberNavController())
     //ScheduledPostDesign()
-
+    AddPost(rememberNavController())
 
 }
