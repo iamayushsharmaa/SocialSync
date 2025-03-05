@@ -16,6 +16,7 @@ import socialsync.composeapp.generated.resources.google_icon
 import socialsync.composeapp.generated.resources.house_blank
 import socialsync.composeapp.generated.resources.house_filled
 import socialsync.composeapp.generated.resources.insta_icon
+import socialsync.composeapp.generated.resources.menu_icon
 import socialsync.composeapp.generated.resources.setting_blank
 import socialsync.composeapp.generated.resources.setting_filled
 import socialsync.composeapp.generated.resources.x_icon
@@ -30,6 +31,8 @@ object Resource {
         val EMAIL = Res.drawable.email_icon
         val INSTAGRAM = Res.drawable.insta_icon
 
+
+        val MENU_ICON = Res.drawable.menu_icon
         val BACK_ICON = Res.drawable.back_iconn
         val HOUSE_BLANK = Res.drawable.house_blank
         val HOUSE_FILLED = Res.drawable.house_filled
