@@ -1,20 +1,18 @@
 package org.example.socialsync.presentation.main
 
-import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.Icon
@@ -30,6 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.example.socialsync.presentation.main.component.ScheduledPostDesign
+import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
 
@@ -48,38 +48,51 @@ fun Home(navController: NavHostController) {
                         contentDescription = "Menu",
                         tint = Color.Black,
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 12.dp)
                             .clickable { /* Handle drawer click */ }
                     )
                 },
                 title = {
                     Row(
-                        modifier = Modifier,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable{
+
+                            },
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            painter = painterResource(Resource.Icons.INSTAGRAM),
-                            contentDescription = "connection icon",
-                            tint = Color.Black,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(shape = CircleShape)
-                                .padding(5.dp)
-                        )
-                        Text(
-                            text = "My App",
-                            modifier = Modifier,
-                            textAlign = TextAlign.Center
-                        )
-
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                painter = painterResource(Resource.Icons.INSTAGRAM),
+                                contentDescription = "connection icon",
+                                tint = Color.Black,
+                                modifier = Modifier
+                                    .size(30.dp)
+                                    .clip(shape = CircleShape)
+                                    .padding(5.dp)
+                            )
+                            Text(
+                                text = "Netfreak",
+                                fontSize = 18.sp,
+                                modifier = Modifier.padding(start = 4.dp),
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 },
                 actions = {
                     Text(
                         text = "Upgrade",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .padding(end = 16.dp)
+                            .padding(end = 8.dp)
                             .clickable { /* Handle upgrade click */ },
                         color = Color.Black
                     )
@@ -94,7 +107,12 @@ fun Home(navController: NavHostController) {
                 .padding(paddingValues)
                 .statusBarsPadding()
                 .fillMaxSize()
+                .background(Color.White)
         ) {
+            Spacer(Modifier.height(8.dp))
+            SocialsDesign()
+
+            Spacer(Modifier.height(10.dp))
             Text(
                 text = "Today",
                 fontSize = 24.sp,
@@ -103,7 +121,15 @@ fun Home(navController: NavHostController) {
                     .padding(start = 16.dp, top = 16.dp)
             )
 
-
+            Spacer(Modifier.height(8.dp))
+            LazyColumn (
+                modifier = Modifier
+                    .fillMaxSize()
+            ){
+                items(2){
+                    ScheduledPostDesign()
+                }
+            }
 
         }
     }

@@ -8,6 +8,7 @@ import socialsync.composeapp.generated.resources.analysis_filled
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.draft_blank
 import socialsync.composeapp.generated.resources.draft_filled
+import socialsync.composeapp.generated.resources.egypt
 import socialsync.composeapp.generated.resources.email_icon
 import socialsync.composeapp.generated.resources.eye_closed
 import socialsync.composeapp.generated.resources.eye_open
@@ -17,11 +18,23 @@ import socialsync.composeapp.generated.resources.house_blank
 import socialsync.composeapp.generated.resources.house_filled
 import socialsync.composeapp.generated.resources.insta_icon
 import socialsync.composeapp.generated.resources.menu_icon
+import socialsync.composeapp.generated.resources.notification_blank
 import socialsync.composeapp.generated.resources.setting_blank
 import socialsync.composeapp.generated.resources.setting_filled
+import socialsync.composeapp.generated.resources.time_blank
 import socialsync.composeapp.generated.resources.x_icon
 
 object Resource {
+
+    object Images{
+        val EGYPT_PHOTO = Res.drawable.egypt
+    }
+    object Font{
+       // val BOLD = Res.
+    }
+
+
+
     object Icons {
         val EYE_OPEN = Res.drawable.eye_open
         val EYE_CLOSED = Res.drawable.eye_closed
@@ -31,9 +44,11 @@ object Resource {
         val EMAIL = Res.drawable.email_icon
         val INSTAGRAM = Res.drawable.insta_icon
 
-
         val MENU_ICON = Res.drawable.menu_icon
         val BACK_ICON = Res.drawable.back_iconn
+        val NOTIFICATION_ICON = Res.drawable.notification_blank
+        val TIME_ICON = Res.drawable.time_blank
+
         val HOUSE_BLANK = Res.drawable.house_blank
         val HOUSE_FILLED = Res.drawable.house_filled
         val ADD_BLANK = Res.drawable.add_blank
