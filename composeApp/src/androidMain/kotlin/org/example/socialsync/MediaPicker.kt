@@ -1,4 +1,5 @@
 package org.example.socialsync
+
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -28,17 +29,14 @@ actual class MediaPicker(
 
 @Composable
 actual fun rememberMediaPicker(): MediaPicker {
-    // Create the image launcher
     val imageLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia()
-    ) { /* Empty callback here - we'll handle it in launchImagePicker */ }
+    ) { }
 
-    // Create the video launcher
     val videoLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia()
-    ) { /* Empty callback here - we'll handle it in launchVideoPicker */ }
+    ) {  }
 
-    // Return the MediaPicker instance
     return remember { MediaPicker(imageLauncher, videoLauncher) }
 }
 

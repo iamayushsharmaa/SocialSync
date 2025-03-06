@@ -20,9 +20,7 @@ fun BottomNavBar(navController: NavHostController) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.AddHabit,
-        BottomNavItem.Draft,
-        BottomNavItem.Analysis,
-        BottomNavItem.Settings
+        BottomNavItem.Draft
     )
 
     BottomNavigation(

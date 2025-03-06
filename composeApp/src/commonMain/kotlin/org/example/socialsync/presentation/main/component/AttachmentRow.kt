@@ -62,12 +62,13 @@ fun AttachmentRow(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp, vertical = 5.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ActionButton(
                 modifier = Modifier
-                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
+                    .background(color = AppColor.WhiteFade),
                 icon = Resource.Icons.ATTACH_ICON,
                 contentDescription = "Pick Image",
                 text = "Image",
@@ -77,7 +78,7 @@ fun AttachmentRow(
             )
             ActionButton(
                 modifier = Modifier
-                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
+                    .background(color = AppColor.WhiteFade),
                 icon = Resource.Icons.ATTACH_ICON,
                 text = "Video",
                 contentDescription = "Pick Video",
@@ -85,7 +86,7 @@ fun AttachmentRow(
             )
 //            ActionButton(
 //                modifier = Modifier
-//                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
+//                    .background(color = AppColor.WhiteFade),
 //                icon = Resource.Icons.ATTACH_ICON,
 //                text = "Tag",
 //                contentDescription = "Add Tag",
@@ -118,11 +119,16 @@ private fun ActionButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(5.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp)
     ) {
         Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(5.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
