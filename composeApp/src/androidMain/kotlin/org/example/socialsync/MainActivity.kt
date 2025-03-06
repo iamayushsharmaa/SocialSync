@@ -22,11 +22,18 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Preview
-//@Composable
-//private fun HomePrev() {
-//    //Home(navController = rememberNavController())
-//    //ScheduledPostDesign()
-////    AddPost(rememberNavController())
-//
-//}
+@Preview
+@Composable
+private fun HomePrev() {
+    //Home(navController = rememberNavController())
+    //ScheduledPostDesign()
+    AddPost(
+        rememberNavController(),
+        onTagClick = TODO(),
+        onImagePick = TODO(),
+        onVideoPick = TODO(),
+        mediaPicker = TODO(),
+        selectedMediaUris = TODO(),
+    )
+
+}

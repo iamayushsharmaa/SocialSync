@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.Uri
+import org.example.socialsync.MediaPicker
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.presentation.main.component.AttachmentRow
 import org.example.socialsync.presentation.main.component.TextInput
@@ -39,10 +40,9 @@ fun AddPost(
     onTagClick: () -> Unit,
     onImagePick: (List<String>) -> Unit,
     onVideoPick: (List<String>) -> Unit,
+    mediaPicker: MediaPicker,
+    selectedMediaUris: List<String>,
 ) {
-    var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
-    val mediaPicker = rememberMediaPicker()
-
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -102,16 +102,13 @@ fun AddPost(
                 ),
             onTagClick = { onTagClick() },
             selectedMediaUris = selectedMediaUris,
-            mediaPicker = mediaPicker
-        ){
-            mediaPicker.launchImagePicker { uris ->
+            mediaPicker = mediaPicker,
+            onImagePicked = { uris->
                 onImagePick(uris)
-            }
-            mediaPicker.launchVideoPicker { uris ->
+            },
+            onVideoPicked = { uris->
                 onVideoPick(uris)
             }
-        }
-
-
+        )
     }
 }

@@ -10,19 +10,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,8 +35,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import org.example.socialsync.MediaPicker
+import org.example.socialsync.app.App
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
@@ -40,10 +47,11 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AttachmentRow(
     modifier: Modifier = Modifier,
-    onTagClick: () -> Unit,
     mediaPicker: MediaPicker,
-    selectedMediaUris: List<String> = emptyList(),
-    onMediaPicked: () -> Unit = {}
+    selectedMediaUris: List<String>,
+    onTagClick: () -> Unit,
+    onImagePicked: (List<String>) -> Unit,
+    onVideoPicked: (List<String>) -> Unit
 ) {
 
     Column(
@@ -53,26 +61,36 @@ fun AttachmentRow(
             .padding(16.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ActionButton(
+                modifier = Modifier
+                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
                 icon = Resource.Icons.ATTACH_ICON,
                 contentDescription = "Pick Image",
+                text = "Image",
                 onClick = {
-                    mediaPicker.launchImagePicker { uris -> onMediaPicked() }
+                    mediaPicker.launchVideoPicker(onImagePicked)
                 }
             )
             ActionButton(
+                modifier = Modifier
+                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
                 icon = Resource.Icons.ATTACH_ICON,
+                text = "Video",
                 contentDescription = "Pick Video",
-                onClick = { mediaPicker.launchVideoPicker { uris -> onMediaPicked() } }
+                onClick = { mediaPicker.launchVideoPicker(onVideoPicked) }
             )
-            ActionButton(
-                icon = Resource.Icons.ATTACH_ICON,
-                contentDescription = "Add Tag",
-                onClick = { onTagClick() }
-            )
+//            ActionButton(
+//                modifier = Modifier
+//                    .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
+//                icon = Resource.Icons.ATTACH_ICON,
+//                text = "Tag",
+//                contentDescription = "Add Tag",
+//                onClick = { onTagClick() }
+//            )
         }
 
         AnimatedVisibility(
@@ -92,25 +110,33 @@ fun AttachmentRow(
 
 @Composable
 private fun ActionButton(
+    modifier: Modifier = Modifier,
+    text: String,
     icon: DrawableResource,
     contentDescription: String,
     onClick: () -> Unit
 ) {
-    IconButton(
+    Button(
         onClick = onClick,
-        modifier = Modifier
-            .size(38.dp)
-            .background(
-                color = AppColor.WhiteFade,
-                shape = CircleShape
-            )
+        modifier = modifier,
+        shape = RoundedCornerShape(8.dp),
+        elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp)
     ) {
-        Icon(
-            painter = painterResource(icon),
-            contentDescription = contentDescription,
-            tint = AppColor.Black,
-            modifier = Modifier.size(24.dp)
-        )
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(icon),
+                contentDescription = contentDescription,
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = text,
+                fontSize = 16.sp
+            )
+        }
     }
 }
 

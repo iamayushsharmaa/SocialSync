@@ -1,7 +1,5 @@
 package org.example.socialsync.presentation.bottomnav
 
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -14,11 +12,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import coil3.Uri
-import coil3.compose.LocalPlatformContext
 import org.example.socialsync.presentation.main.AddPost
 import org.example.socialsync.presentation.main.Draft
 import org.example.socialsync.presentation.main.Home
+import org.example.socialsync.rememberMediaPicker
 
 
 @Composable
@@ -27,6 +24,9 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val innerNavController = rememberNavController()
+
+    var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
+    val mediaPicker = rememberMediaPicker()
 
     Scaffold(
         bottomBar = {
@@ -47,7 +47,15 @@ fun MainScreen(
             composable(BottomNavItem.AddHabit.route) {
                 AddPost(
                     navController = outerNavController,
-                    onTagClick = {},
+                    onTagClick = { },
+                    onImagePick = { uris->
+                        selectedMediaUris = selectedMediaUris + uris
+                    },
+                    onVideoPick = { uris->
+                        selectedMediaUris = selectedMediaUris + uris
+                    },
+                    selectedMediaUris = selectedMediaUris,
+                    mediaPicker = mediaPicker
                 )
             }
             composable(BottomNavItem.Draft.route) {
