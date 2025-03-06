@@ -35,7 +35,11 @@ import socialsync.composeapp.generated.resources.connect_x
 import socialsync.composeapp.generated.resources.connect_your_socials
 
 @Composable
-fun ConnectSocials(navController: NavHostController, modifier: Modifier) {
+fun ConnectSocials(
+    navController: NavHostController,
+    modifier: Modifier,
+    onClick: () -> Unit
+) {
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -80,11 +84,18 @@ fun ConnectSocials(navController: NavHostController, modifier: Modifier) {
 
         ConnectButton(
             icon = Resource.Icons.INSTAGRAM,
-            text = Res.string.connect_instagram
+            text = Res.string.connect_instagram,
+            onClick ={
+                onClick()
+            }
+
         )
         ConnectButton(
             icon = Resource.Icons.X,
-            text = Res.string.connect_x
+            text = Res.string.connect_x,
+            onClick = {
+                onClick()
+            }
         )
 
     }

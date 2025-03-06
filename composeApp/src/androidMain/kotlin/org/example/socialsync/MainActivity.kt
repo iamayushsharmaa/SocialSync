@@ -22,11 +22,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview
-@Composable
-private fun HomePrev() {
-    //Home(navController = rememberNavController())
-    //ScheduledPostDesign()
-    AddPost(rememberNavController())
-
-}
+//@Preview
+//@Composable
+//private fun HomePrev() {
+//    //Home(navController = rememberNavController())
+//    //ScheduledPostDesign()
+////    AddPost(rememberNavController())
+//
+//}

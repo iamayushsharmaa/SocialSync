@@ -1,4 +1,5 @@
 [versions]
+accompanistPager = "0.34.0"
 agp = "8.8.2"
 android-compileSdk = "35"
 android-minSdk = "24"
@@ -34,9 +35,11 @@ navigationCompose = "2.8.0-alpha10"
 lifecycleViewModel = "2.8.7"
 uiTextAndroid = "1.7.8"
 navigationCompos = "2.8.8"
+activityKtx = "1.10.1"
 
 
 [libraries]
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompos" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 bson-kotlinx = { module = "org.mongodb:bson-kotlinx", version.ref = "bsonKotlinx" }
@@ -99,6 +102,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComp
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeMultiplatform" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-ui-text-android = { group = "androidx.compose.ui", name = "ui-text-android", version.ref = "uiTextAndroid" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

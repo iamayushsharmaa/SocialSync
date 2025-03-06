@@ -1,6 +1,7 @@
 package org.example.socialsync.presentation.socials
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,12 +28,16 @@ import org.jetbrains.compose.resources.stringResource
 fun ConnectButton(
     modifier: Modifier = Modifier,
     icon: DrawableResource,
-    text: StringResource
+    text: StringResource,
+    onClick : () -> Unit
 ) {
     Row (
         modifier = Modifier
             .fillMaxWidth()
             .height(74.dp)
+            .clickable {
+                onClick()
+            }
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .background(shape = RoundedCornerShape(14.dp), color = Color.Black),
         verticalAlignment = CenterVertically,

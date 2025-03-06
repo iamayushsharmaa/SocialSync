@@ -5,6 +5,7 @@ import socialsync.composeapp.generated.resources.add_blank
 import socialsync.composeapp.generated.resources.add_filled
 import socialsync.composeapp.generated.resources.analysis_blank
 import socialsync.composeapp.generated.resources.analysis_filled
+import socialsync.composeapp.generated.resources.attach_icon
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.draft_blank
 import socialsync.composeapp.generated.resources.draft_filled
@@ -13,6 +14,7 @@ import socialsync.composeapp.generated.resources.email_icon
 import socialsync.composeapp.generated.resources.eye_closed
 import socialsync.composeapp.generated.resources.eye_open
 import socialsync.composeapp.generated.resources.fb_icon
+import socialsync.composeapp.generated.resources.folder_icon
 import socialsync.composeapp.generated.resources.google_icon
 import socialsync.composeapp.generated.resources.house_blank
 import socialsync.composeapp.generated.resources.house_filled
@@ -21,6 +23,7 @@ import socialsync.composeapp.generated.resources.menu_icon
 import socialsync.composeapp.generated.resources.notification_blank
 import socialsync.composeapp.generated.resources.setting_blank
 import socialsync.composeapp.generated.resources.setting_filled
+import socialsync.composeapp.generated.resources.tag_icon
 import socialsync.composeapp.generated.resources.time_blank
 import socialsync.composeapp.generated.resources.x_icon
 
@@ -59,6 +62,11 @@ object Resource {
         val ANALYSIS_FILLED = Res.drawable.analysis_filled
         val SETTING_BLANK = Res.drawable.setting_blank
         val SETTING_FILLED = Res.drawable.setting_filled
+
+        val ATTACH_ICON = Res.drawable.attach_icon
+        val FOLDER_ICON = Res.drawable.folder_icon
+        val TAG_ICON = Res.drawable.tag_icon
+
 
     }
 }

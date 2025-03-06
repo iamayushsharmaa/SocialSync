@@ -35,10 +35,13 @@ kotlin {
 
         androidMain.dependencies {
             implementation(compose.preview)
+            implementation(compose.material3)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.navigation.compose)
+            implementation(libs.coil.compose)
+            implementation (libs.accompanist.pager)
             implementation(libs.kotlinx.coroutines.android)
         }
         commonMain.dependencies {
@@ -59,10 +62,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.navigation.compose)
+            implementation(compose.material)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.okhttp)
-
-
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -103,6 +105,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.ui.text.android)
+    implementation(libs.androidx.activity.ktx)
     debugImplementation(compose.uiTooling)
 }
 

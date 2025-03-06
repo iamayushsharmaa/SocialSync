@@ -1,22 +1,31 @@
 package org.example.socialsync.presentation.bottomnav
 
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import coil3.Uri
+import coil3.compose.LocalPlatformContext
 import org.example.socialsync.presentation.main.AddPost
-import org.example.socialsync.presentation.main.Analysis
 import org.example.socialsync.presentation.main.Draft
 import org.example.socialsync.presentation.main.Home
-import org.example.socialsync.presentation.main.Setting
 
 
 @Composable
-fun MainScreen(outerNavController: NavHostController) {
+fun MainScreen(
+    outerNavController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     val innerNavController = rememberNavController()
 
     Scaffold(
@@ -24,28 +33,26 @@ fun MainScreen(outerNavController: NavHostController) {
             BottomNavBar(navController = innerNavController)
         }
     ) {  innerPadding->
+
         NavHost(
             navController = innerNavController,
             startDestination = BottomNavItem.Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(BottomNavItem.Home.route) {
-                Home(navController = outerNavController)
-            }
-            composable(BottomNavItem.AddHabit.route) {
-                AddPost(
+                Home(
                     navController = outerNavController
                 )
             }
+            composable(BottomNavItem.AddHabit.route) {
+                AddPost(
+                    navController = outerNavController,
+                    onTagClick = {},
+                )
+            }
             composable(BottomNavItem.Draft.route) {
-                Draft(navController = outerNavController)
-            }
-            composable(BottomNavItem.Analysis.route) {
-                Analysis(navController = outerNavController)
-            }
-            composable(BottomNavItem.Settings.route) {
-                Setting(
-                    navController = innerNavController
+                Draft(
+                    navController = outerNavController
                 )
             }
         }

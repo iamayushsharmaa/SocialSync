@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import org.example.socialsync.authentication.OauthSignIn
 import org.example.socialsync.authentication.SignIn
 import org.example.socialsync.authentication.SignUp
+import org.example.socialsync.presentation.bottomnav.MainScreen
 import org.example.socialsync.presentation.socials.ConnectSocials
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -85,7 +86,7 @@ fun SocialApp(
                         navController.navigate(SocialScreen.SignIn.name)
                     },
                     onNavigateToHome = {
-                        navController.navigate(SocialScreen.OauthSignIn.name)
+                        navController.navigate(SocialScreen.ConnectSocial.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -99,7 +100,7 @@ fun SocialApp(
                         navController.navigate(SocialScreen.SignUp.name)
                     },
                     onNavigateToHome = {
-                        navController.navigate(SocialScreen.ConnectSocial.name)
+                        navController.navigate(SocialScreen.MainScreen.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -111,16 +112,20 @@ fun SocialApp(
                     navController = navController,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    onClick = {
+                        navController.navigate(SocialScreen.MainScreen.name)
+                    }
+
                 )
             }
             composable(route = SocialScreen.MainScreen.name){
-//                Home(
-//                    navController = navController,
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(16.dp)
-//                )
+                MainScreen(
+                    outerNavController = navController,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                )
             }
         }
     }
