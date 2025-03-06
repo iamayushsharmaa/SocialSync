@@ -98,7 +98,7 @@ fun TextInput(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp),
+                .padding(top = 4.dp, end = 8.dp),
             horizontalArrangement = Arrangement.End
         ) {
             Text(

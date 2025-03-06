@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -57,18 +58,17 @@ fun AttachmentRow(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(AppColor.White)
-            .padding(16.dp)
+            .padding(horizontal = 4.dp, vertical = 4.dp)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 6.dp, vertical = 5.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ActionButton(
                 modifier = Modifier
-                    .background(color = AppColor.WhiteFade),
+                    .fillMaxHeight()
+                    .weight(1f),
                 icon = Resource.Icons.ATTACH_ICON,
                 contentDescription = "Pick Image",
                 text = "Image",
@@ -76,22 +76,16 @@ fun AttachmentRow(
                     mediaPicker.launchVideoPicker(onImagePicked)
                 }
             )
+            Spacer(Modifier.width(12.dp))
             ActionButton(
                 modifier = Modifier
-                    .background(color = AppColor.WhiteFade),
+                    .fillMaxHeight()
+                    .weight(1f),
                 icon = Resource.Icons.ATTACH_ICON,
                 text = "Video",
                 contentDescription = "Pick Video",
                 onClick = { mediaPicker.launchVideoPicker(onVideoPicked) }
             )
-//            ActionButton(
-//                modifier = Modifier
-//                    .background(color = AppColor.WhiteFade),
-//                icon = Resource.Icons.ATTACH_ICON,
-//                text = "Tag",
-//                contentDescription = "Add Tag",
-//                onClick = { onTagClick() }
-//            )
         }
 
         AnimatedVisibility(
@@ -119,16 +113,15 @@ private fun ActionButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(5.dp),
-        shape = RoundedCornerShape(8.dp),
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFF5F8FA),
+            contentColor = AppColor.Black
+        ),
         elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(5.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
