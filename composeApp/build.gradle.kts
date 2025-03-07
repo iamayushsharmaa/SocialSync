@@ -65,6 +65,7 @@ kotlin {
             implementation(compose.material)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.okhttp)
+            implementation(libs.kotlinx.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -106,6 +107,8 @@ android {
 dependencies {
     implementation(libs.androidx.ui.text.android)
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.protolite.well.known.types)
+    implementation(libs.places)
     debugImplementation(compose.uiTooling)
 }
 

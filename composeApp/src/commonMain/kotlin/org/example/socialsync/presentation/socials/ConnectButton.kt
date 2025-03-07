@@ -32,14 +32,10 @@ fun ConnectButton(
     onClick : () -> Unit
 ) {
     Row (
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(74.dp)
+        modifier = modifier
             .clickable {
                 onClick()
-            }
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .background(shape = RoundedCornerShape(14.dp), color = Color.Black),
+            } ,
         verticalAlignment = CenterVertically,
         horizontalArrangement = Arrangement.Center
     ){

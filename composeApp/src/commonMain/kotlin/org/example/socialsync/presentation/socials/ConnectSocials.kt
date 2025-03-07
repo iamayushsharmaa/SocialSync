@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -62,7 +63,7 @@ fun ConnectSocials(
                 onClick = { }
             ){
                 Icon(
-                    painter = painterResource(Resource.Icons.BACK_ICON),
+                    painter = painterResource(Resource.Icons.BACK_ARRAOW),
                     tint = Color.Black,
                     contentDescription = "show password"
                 )
@@ -70,7 +71,6 @@ fun ConnectSocials(
         }
 
         Spacer(Modifier.height(24.dp))
-
         Text(
             text = stringResource(Res.string.connect_your_socials),
             fontWeight = FontWeight.Bold,
@@ -83,14 +83,24 @@ fun ConnectSocials(
         Spacer(Modifier.height(16.dp))
 
         ConnectButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(58.dp)
+                .padding(horizontal = 16.dp)
+                .background(shape = RoundedCornerShape(12.dp), color = AppColor.BlackFade),
             icon = Resource.Icons.INSTAGRAM,
             text = Res.string.connect_instagram,
-            onClick ={
+            onClick = {
                 onClick()
             }
-
         )
+        Spacer(Modifier.height(12.dp))
         ConnectButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(58.dp)
+                .padding(horizontal = 16.dp)
+                .background(shape = RoundedCornerShape(12.dp), color = AppColor.BlackFade),
             icon = Resource.Icons.X,
             text = Res.string.connect_x,
             onClick = {

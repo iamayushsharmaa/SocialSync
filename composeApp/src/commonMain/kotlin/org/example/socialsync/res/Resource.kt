@@ -1,11 +1,11 @@
 package org.example.socialsync.res
 
 import socialsync.composeapp.generated.resources.Res
-import socialsync.composeapp.generated.resources.add_blank
-import socialsync.composeapp.generated.resources.add_filled
+import socialsync.composeapp.generated.resources.add_icon
 import socialsync.composeapp.generated.resources.analysis_blank
 import socialsync.composeapp.generated.resources.analysis_filled
 import socialsync.composeapp.generated.resources.attach_icon
+import socialsync.composeapp.generated.resources.back_arrow_icon
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.draft_blank
 import socialsync.composeapp.generated.resources.draft_filled
@@ -21,10 +21,14 @@ import socialsync.composeapp.generated.resources.house_filled
 import socialsync.composeapp.generated.resources.insta_icon
 import socialsync.composeapp.generated.resources.menu_icon
 import socialsync.composeapp.generated.resources.notification_blank
+import socialsync.composeapp.generated.resources.post_now_icon
+import socialsync.composeapp.generated.resources.send_icon
 import socialsync.composeapp.generated.resources.setting_blank
 import socialsync.composeapp.generated.resources.setting_filled
 import socialsync.composeapp.generated.resources.tag_icon
 import socialsync.composeapp.generated.resources.time_blank
+import socialsync.composeapp.generated.resources.time_bottle_icon
+import socialsync.composeapp.generated.resources.time_date_picker_icon
 import socialsync.composeapp.generated.resources.x_icon
 
 object Resource {
@@ -35,8 +39,6 @@ object Resource {
     object Font{
        // val BOLD = Res.
     }
-
-
 
     object Icons {
         val EYE_OPEN = Res.drawable.eye_open
@@ -49,13 +51,14 @@ object Resource {
 
         val MENU_ICON = Res.drawable.menu_icon
         val BACK_ICON = Res.drawable.back_iconn
+        val BACK_ARRAOW = Res.drawable.back_arrow_icon
         val NOTIFICATION_ICON = Res.drawable.notification_blank
         val TIME_ICON = Res.drawable.time_blank
 
         val HOUSE_BLANK = Res.drawable.house_blank
         val HOUSE_FILLED = Res.drawable.house_filled
-        val ADD_BLANK = Res.drawable.add_blank
-        val ADD_FILLED = Res.drawable.add_filled
+        val ADD_BLANK = Res.drawable.add_icon
+        val ADD_FILLED = Res.drawable.add_icon
         val DRAFT_BLANK = Res.drawable.draft_blank
         val DRAFT_FILLED = Res.drawable.draft_filled
         val ANALYSIS_BLANK = Res.drawable.analysis_blank
@@ -66,7 +69,11 @@ object Resource {
         val ATTACH_ICON = Res.drawable.attach_icon
         val FOLDER_ICON = Res.drawable.folder_icon
         val TAG_ICON = Res.drawable.tag_icon
+        val SEND_ICON = Res.drawable.send_icon
 
+        val DATETIME_ICON = Res.drawable.time_date_picker_icon
+        val POST_NOW_ICON = Res.drawable.post_now_icon
+        val DRAFT_ICON = Res.drawable.time_bottle_icon
 
     }
 }

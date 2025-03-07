@@ -9,7 +9,6 @@
     <string name = "continue_email">Continue with Email</string>
     <string name = "continue_x">Continue with X</string>
 
-
     <string name = "take_control_social_media">Take control of your social media</string>
     <string name = "sign_up">Sign up</string>
     <string name = "sign_in">Sign in</string>
@@ -30,9 +29,15 @@
     <string name = "connect_instagram">Connect Instagram</string>
     <string name = "connect_x">Connect X</string>
 
-
     <string name = "home">Home</string>
     <string name="drafts">Drafts</string>
     <string name="analysis">Analysis</string>
     <string name="settings">Settings</string>
+
+    <string name = "choose_one">Choose your best time.</string>
+    <string name = "schedule">Schedule</string>
+    <string name= "draft">Draft</string>
+    <string name= "post_now">Post now</string>
+    <string name= "proceed">Proceed</string>
+
 </resources>
