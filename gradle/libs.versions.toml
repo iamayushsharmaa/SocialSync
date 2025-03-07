@@ -1,6 +1,6 @@
 [versions]
 accompanistPager = "0.34.0"
-agp = "8.8.2"
+agp = "8.9.0"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -18,6 +18,7 @@ coilNetworkOkhttp = "3.1.0"
 commonsCodec = "1.18.0"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
+kmpDateTimePicker = "1.0.5"
 koinKtor = "4.0.2"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
@@ -49,6 +50,7 @@ bson-kotlinx = { module = "org.mongodb:bson-kotlinx", version.ref = "bsonKotlinx
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commonsCodec" }
+kmp-date-time-picker = { module = "network.chaintech:kmp-date-time-picker", version.ref = "kmpDateTimePicker" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }

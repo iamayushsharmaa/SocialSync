@@ -39,9 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
-import kotlinx.datetime.format
 import org.example.socialsync.MediaPicker
-import org.example.socialsync.app.App
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.presentation.main.component.AttachmentRow
 import org.example.socialsync.presentation.main.component.TextInput
@@ -254,7 +252,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                             fontWeight = FontWeight.Normal,
                             color = AppColor.Black
                         )
-                        PickerLayout(
+                        DateTimeLayout(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .fillMaxHeight()
@@ -280,7 +278,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                             fontWeight = FontWeight.Normal,
                             color = AppColor.Black
                         )
-                        PickerLayout(
+                        DateTimeLayout(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .fillMaxHeight()
@@ -371,9 +369,7 @@ private fun PostOption(
             fontWeight = FontWeight.SemiBold,
             color = AppColor.Black
         )
-
         Spacer(Modifier.weight(1f))
-
         RadioButton(
             modifier = Modifier.padding(end = 16.dp),
             selected = isSelected,
@@ -387,7 +383,7 @@ private fun PostOption(
 }
 
 @Composable
-private fun PickerLayout(
+private fun DateTimeLayout(
     modifier: Modifier = Modifier,
     text: String,
     icon: DrawableResource,
@@ -416,6 +412,3 @@ private fun PickerLayout(
         )
     }
 }
-
-
-

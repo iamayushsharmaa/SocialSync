@@ -66,6 +66,8 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.okhttp)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.kmp.date.time.picker)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
