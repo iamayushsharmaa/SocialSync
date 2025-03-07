@@ -6,6 +6,7 @@ import socialsync.composeapp.generated.resources.analysis_blank
 import socialsync.composeapp.generated.resources.analysis_filled
 import socialsync.composeapp.generated.resources.attach_icon
 import socialsync.composeapp.generated.resources.back_arrow_icon
+import socialsync.composeapp.generated.resources.back_icon
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.draft_blank
 import socialsync.composeapp.generated.resources.draft_filled
@@ -51,7 +52,7 @@ object Resource {
 
         val MENU_ICON = Res.drawable.menu_icon
         val BACK_ICON = Res.drawable.back_iconn
-        val BACK_ARRAOW = Res.drawable.back_arrow_icon
+        val BACK_ARRAOW = Res.drawable.back_icon
         val NOTIFICATION_ICON = Res.drawable.notification_blank
         val TIME_ICON = Res.drawable.time_blank
 
