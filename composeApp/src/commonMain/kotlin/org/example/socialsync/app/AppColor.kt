@@ -11,6 +11,7 @@ object AppColor {
     val Yellow2 = Color(0xFFfdb73e)
     val SkyBlue = Color(0xFF6cc0e5)
     val Blue = Color(0xFF6200EE)
+    val LIGHTBLUE = Color(0xff007AFF)
 
 
 

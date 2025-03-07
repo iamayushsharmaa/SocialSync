@@ -174,16 +174,28 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
     var showTimePicker by remember { mutableStateOf(false) }
 
     if (showDatePicker){
-        showDatePicker { date->
-            selectedDate = date
-            showDatePicker = false
-        }
+        showDatePicker(
+            showDatePicker,
+            onDateSelected = { date->
+                selectedDate = date
+                showDatePicker = false
+            },
+            onDismiss = {
+                showDatePicker = false
+            },
+        )
     }
     if (showTimePicker){
-        showTimePicker { time->
-            selectedTime = time
-            showTimePicker = false
-        }
+        showTimePicker(
+            showTimePicker,
+            onTimeSelected = { time->
+                selectedTime = time
+                showTimePicker = false
+            },
+            onDismiss = {
+                showTimePicker = false
+            },
+        )
     }
 
     ModalBottomSheet(
@@ -261,7 +273,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                             text = selectedDate?.toString() ?: "Pick Date",
                             icon = Resource.Icons.DATETIME_ICON,
                             onClick = {
-                               showDateTime = true
+                               showDatePicker = true
                             }
                         )
                     }
