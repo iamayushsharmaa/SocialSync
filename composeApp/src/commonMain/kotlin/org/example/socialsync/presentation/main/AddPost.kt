@@ -130,7 +130,6 @@ fun AddPost(
             }
         )
         Spacer(Modifier.weight(1f))
-
         Button(
             onClick = {
                 showBottomSheet.value = true
@@ -149,7 +148,7 @@ fun AddPost(
                 painter = painterResource(Resource.Icons.SEND_ICON),
                 contentDescription = "Add",
                 modifier = Modifier.size(24.dp),
-                tint = Color.White // Adjust tint as needed
+                tint = Color.White
             )
         }
         if (showBottomSheet.value) {

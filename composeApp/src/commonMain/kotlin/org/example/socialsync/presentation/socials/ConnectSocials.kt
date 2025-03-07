@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ import socialsync.composeapp.generated.resources.Res
 import socialsync.composeapp.generated.resources.connect_instagram
 import socialsync.composeapp.generated.resources.connect_x
 import socialsync.composeapp.generated.resources.connect_your_socials
+import socialsync.composeapp.generated.resources.take_control_social_media
 
 @Composable
 fun ConnectSocials(
@@ -80,7 +82,16 @@ fun ConnectSocials(
             fontFamily = FontFamily.Serif,
             color = Color.Black
         )
-        Spacer(Modifier.height(16.dp))
+        Text(
+            text = stringResource(Res.string.take_control_social_media),
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Normal,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp, horizontal = 16.dp),
+            textAlign = TextAlign.Center
+        )
+        Spacer(Modifier.height(30.dp))
 
         ConnectButton(
             modifier = Modifier
@@ -107,6 +118,5 @@ fun ConnectSocials(
                 onClick()
             }
         )
-
     }
 }
