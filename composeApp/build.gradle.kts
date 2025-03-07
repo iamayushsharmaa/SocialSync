@@ -67,6 +67,10 @@ kotlin {
             implementation(libs.coil.network.okhttp)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kmp.date.time.picker)
+            api(libs.permissions)
+            api(libs.permissions.gallery)
+            api(libs.permissions.compose)
+
 
         }
         commonTest.dependencies {

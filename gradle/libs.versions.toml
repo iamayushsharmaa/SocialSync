@@ -35,6 +35,7 @@ koin = "4.0.2"
 koinComposeMultiplatform = "4.0.2"
 navigationCompose = "2.8.0-alpha10"
 lifecycleViewModel = "2.8.7"
+permissions = "0.19.1"
 uiTextAndroid = "1.7.8"
 navigationCompos = "2.8.8"
 activityKtx = "1.10.1"
@@ -109,6 +110,9 @@ koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", ver
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-ui-text-android = { group = "androidx.compose.ui", name = "ui-text-android", version.ref = "uiTextAndroid" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+permissions = { module = "dev.icerock.moko:permissions", version.ref = "permissions" }
+permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "permissions" }
+permissions-gallery = { module = "dev.icerock.moko:permissions-gallery", version.ref = "permissions" }
 protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 
