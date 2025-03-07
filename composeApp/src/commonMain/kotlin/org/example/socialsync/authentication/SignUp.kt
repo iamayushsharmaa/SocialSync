@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -94,18 +95,17 @@ fun SignUp(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 modifier = Modifier
-                    .padding(top = 15.dp, bottom = 3.dp)
+                    .padding(top = 15.dp, bottom = 3.dp, start = 8.dp, end = 8.dp)
             )
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Normal,
-
-                    ),
+                    fontWeight = FontWeight.Normal
+                ),
                 placeholder = { Text(
                     text = stringResource(Res.string.enter_email),
                     color = Color.LightGray,
@@ -114,8 +114,8 @@ fun SignUp(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .height(62.dp)
-                    .padding(),
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -133,12 +133,12 @@ fun SignUp(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 modifier = Modifier
-                    .padding(top = 15.dp, bottom = 3.dp)
+                    .padding(top = 15.dp, bottom = 3.dp, start = 8.dp, end = 8.dp)
             )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 16.sp,
@@ -153,7 +153,7 @@ fun SignUp(
                     Icon(
                         painter = painterResource(if (isNewPasswordVisible) Resource.Icons.EYE_OPEN else Resource.Icons.EYE_CLOSED),
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(18.dp)
                             .clickable{
                                 isNewPasswordVisible = !isNewPasswordVisible
                             },
@@ -167,8 +167,8 @@ fun SignUp(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .height(62.dp)
-                    .padding(),
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -186,18 +186,17 @@ fun SignUp(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
                 modifier = Modifier
-                    .padding(top = 15.dp, bottom = 3.dp)
+                    .padding(top = 15.dp, bottom = 3.dp, start = 8.dp, end = 8.dp)
             )
             OutlinedTextField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Normal,
-
-                    ),
+                    fontWeight = FontWeight.Normal
+                ),
                 placeholder = { Text(
                     text = stringResource(Res.string.repeat_password),
                     color = Color.LightGray,
@@ -207,7 +206,7 @@ fun SignUp(
                     Icon(
                         painter = painterResource(if (isConfirmPasswordVisible) Resource.Icons.EYE_OPEN else Resource.Icons.EYE_CLOSED),
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(20.dp)
                             .clickable{
                                 isConfirmPasswordVisible = !isConfirmPasswordVisible
                             },
@@ -221,8 +220,8 @@ fun SignUp(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .height(62.dp)
-                    .padding(),
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -241,9 +240,9 @@ fun SignUp(
                 onClick = { onNavigateToHome() },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(70.dp)
+                    .height(66.dp)
                     .padding(vertical = 5.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = Color.White,
@@ -279,7 +278,7 @@ fun SignUp(
             ClickableText(
                 text = annotatedText,
                 style = TextStyle(
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal
                 ),
                 onClick = { offset ->

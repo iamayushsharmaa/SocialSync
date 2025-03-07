@@ -64,12 +64,11 @@ fun SignIn(
     onNavigateToHome: () -> Unit
 ) {
 
-    val viewModel = koinViewModel<AuthViewModel>()
+   // val viewModel = koinViewModel<AuthViewModel>()
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
-
 
     Column (
         modifier = Modifier
@@ -90,7 +89,7 @@ fun SignIn(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 32.sp,
                 modifier = Modifier
-                    .padding(top = 5.dp)
+                    .padding(top = 5.dp, start = 8.dp)
             )
             Spacer(Modifier.height(5.dp))
             Text(
@@ -98,12 +97,12 @@ fun SignIn(
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
                 modifier = Modifier
-                    .padding(top = 15.dp, bottom = 5.dp)
+                    .padding(top = 15.dp, bottom = 3.dp, start = 8.dp, end = 8.dp)
             )
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 16.sp,
@@ -120,8 +119,8 @@ fun SignIn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .height(62.dp)
-                    .padding(),
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -139,12 +138,12 @@ fun SignIn(
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
                 modifier = Modifier
-                    .padding(top = 15.dp, bottom = 5.dp)
+                    .padding(top = 15.dp, bottom = 3.dp, start = 8.dp, end = 8.dp)
             )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
                     color = Color.Black,
                     fontSize = 16.sp,
@@ -161,7 +160,7 @@ fun SignIn(
                     Icon(
                         painter = painterResource(if (isPasswordVisible) Resource.Icons.EYE_OPEN else Resource.Icons.EYE_CLOSED),
                         modifier = Modifier
-                            .size(22.dp)
+                            .size(20.dp)
                             .clickable{
                                 isPasswordVisible = !isPasswordVisible
                             },
@@ -175,8 +174,8 @@ fun SignIn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .height(62.dp)
-                    .padding(),
+                    .height(56.dp)
+                    .padding(horizontal = 8.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -191,7 +190,7 @@ fun SignIn(
             )
             Text(
                 text = stringResource(Res.string.forget_password),
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 modifier = Modifier
                     .align(End)
                     .padding(8.dp)
@@ -205,9 +204,9 @@ fun SignIn(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(70.dp)
+                    .height(66.dp)
                     .padding(vertical = 5.dp),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Black,
                     contentColor = Color.White,
@@ -243,7 +242,7 @@ fun SignIn(
             ClickableText(
                 text = annotatedText,
                 style = TextStyle(
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Normal
                 ),
                 onClick = { offset ->

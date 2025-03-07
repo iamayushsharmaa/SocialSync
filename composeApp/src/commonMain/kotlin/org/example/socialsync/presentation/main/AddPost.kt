@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -42,6 +44,7 @@ import kotlinx.datetime.LocalTime
 import org.example.socialsync.MediaPicker
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.presentation.main.component.AttachmentRow
+import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.presentation.main.component.TextInput
 import org.example.socialsync.presentation.main.component.showDatePicker
 import org.example.socialsync.presentation.main.component.showTimePicker
@@ -76,24 +79,18 @@ fun AddPost(
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
-            verticalAlignment = CenterVertically
+                .height(60.dp),
+            verticalAlignment = CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ){
-            Icon(
-                painter = painterResource(Resource.Icons.BACK_ICON),
-                contentDescription = "",
+            SocialsDesign(
                 modifier = Modifier
-                    .size(30.dp)
-                    .padding(start = 12.dp)
+                    .wrapContentSize()
+                    .defaultMinSize(100.dp)
+                    .height(60.dp)
+                    .padding(horizontal = 16.dp, vertical = 3.dp)
+                    .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
             )
-            Spacer(Modifier.weight(1f))
-            Icon(
-                painter = painterResource(Resource.Icons.GOOGLE),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(33.dp)
-            )
-            Spacer(Modifier.weight(1f))
         }
 
         Spacer(Modifier.height(10.dp))
@@ -232,7 +229,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .padding(8.dp)
+                    .padding(horizontal = 8.dp, vertical = 10.dp)
                     .background(shape = RoundedCornerShape(12.dp), color = AppColor.White),
                 text = stringResource(Res.string.schedule),
                 icon = Resource.Icons.DATETIME_ICON,
@@ -308,7 +305,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .padding(8.dp)
+                    .padding(horizontal = 8.dp, vertical = 10.dp)
                     .background(shape = RoundedCornerShape(12.dp), color = AppColor.White),
                 text = stringResource(Res.string.post_now),
                 icon = Resource.Icons.POST_NOW_ICON,
@@ -319,7 +316,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .padding(8.dp)
+                    .padding(horizontal = 8.dp, vertical = 10.dp)
                     .background(shape = RoundedCornerShape(12.dp), color = AppColor.White),
                 text = stringResource(Res.string.draft),
                 icon = Resource.Icons.DRAFT_ICON,

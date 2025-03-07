@@ -56,7 +56,7 @@ fun SocialApp(
 
         NavHost(
             navController = navController,
-            startDestination = SocialScreen.SignUp.name,
+            startDestination = SocialScreen.MainScreen.name,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)

@@ -26,13 +26,11 @@ import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun SocialsDesign() {
+fun SocialsDesign(
+    modifier: Modifier = Modifier
+) {
     Row (
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-            .padding(horizontal = 16.dp, vertical = 3.dp)
-            .background(shape = RoundedCornerShape(18.dp), color = AppColor.WhiteFade),
+        modifier = modifier,
         verticalAlignment = CenterVertically,
 
     ){

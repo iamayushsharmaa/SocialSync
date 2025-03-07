@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import org.example.socialsync.app.AppColor
 import org.example.socialsync.presentation.main.component.ScheduledPostDesign
 import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.res.Resource
@@ -110,7 +112,13 @@ fun Home(navController: NavHostController) {
                 .background(Color.White)
         ) {
             Spacer(Modifier.height(8.dp))
-            SocialsDesign()
+            SocialsDesign(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .padding(horizontal = 16.dp, vertical = 3.dp)
+                    .background(shape = RoundedCornerShape(18.dp), color = AppColor.WhiteFade)
+            )
 
             Spacer(Modifier.height(10.dp))
             Text(
