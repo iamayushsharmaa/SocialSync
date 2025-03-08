@@ -58,7 +58,7 @@ import kotlinx.datetime.LocalTime
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.app.PermissionsViewModel
 import org.example.socialsync.presentation.main.component.AttachmentRow
-import org.example.socialsync.presentation.main.component.MediaLazyRow
+import org.example.socialsync.presentation.main.component.MediaLayout
 import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.presentation.main.component.TextInput
 import org.example.socialsync.presentation.main.component.showDatePicker
@@ -155,7 +155,6 @@ fun AddPost(
             )
 
             AttachmentRow(
-                imageLoader = imageLoader,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(66.dp)
@@ -188,7 +187,7 @@ fun AddPost(
                     modifier = Modifier
                         .padding(top = 6.dp, start = 20.dp)
                 )
-                MediaLazyRow(
+                MediaLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(260.dp)
@@ -198,14 +197,13 @@ fun AddPost(
                     uris = selectedMediaUris,
                 )
             }
-
             Spacer(Modifier.weight(1f))
         }
         Button(
             onClick = { showBottomSheet.value = true },
             modifier = Modifier
-                .align(Alignment.BottomEnd) // Fixed at bottom-right
-                .padding(end = 20.dp, bottom = 22.dp)
+                .align(Alignment.BottomEnd)
+                .padding(end = 22.dp, bottom = 22.dp)
                 .size(56.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(containerColor = AppColor.Black),
@@ -226,7 +224,6 @@ fun AddPost(
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
