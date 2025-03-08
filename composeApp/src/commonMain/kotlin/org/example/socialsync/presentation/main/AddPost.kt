@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -42,8 +43,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.mohamedrejeb.calf.core.LocalPlatformContext
+import com.mohamedrejeb.calf.picker.FilePickerFileType
+import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
+import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
 import dev.icerock.moko.permissions.PermissionState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
@@ -59,7 +63,6 @@ import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.viewmodel.koinViewModel
 import socialsync.composeapp.generated.resources.Res
 import socialsync.composeapp.generated.resources.choose_one
 import socialsync.composeapp.generated.resources.draft
@@ -71,11 +74,28 @@ import socialsync.composeapp.generated.resources.schedule
 fun AddPost(
     navController: NavHostController,
     onTagClick: () -> Unit,
-    onImagePick: (List<String>) -> Unit,
-    onVideoPick: (List<String>) -> Unit,
-    selectedMediaUris: List<String>,
     permissionViewModel: PermissionsViewModel,
 ) {
+
+    val scope = rememberCoroutineScope()
+    val context = LocalPlatformContext.current
+
+    var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
+
+    val imagePickerLauncher = rememberFilePickerLauncher(
+        type = FilePickerFileType.Image,
+        selectionMode = FilePickerSelectionMode.Multiple,
+        onResult = { uris ->
+            selectedMediaUris = uris.map { it.toString() }
+        }
+    )
+    val videoPickerLauncher = rememberFilePickerLauncher(
+        type = FilePickerFileType.Video,
+        selectionMode = FilePickerSelectionMode.Multiple,
+        onResult = { uris ->
+            selectedMediaUris = uris.map { it.toString() }
+        }
+    )
 
     val showBottomSheet = remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
@@ -85,20 +105,6 @@ fun AddPost(
     var permissionDeniedAlways by remember { mutableStateOf(false) }
     var selectedImage by remember { mutableStateOf<ImageBitmap?>(null) }
     var openImagePicker by remember { mutableStateOf(value = false) }
-
-//    CMPImagePickNCropDialog(
-//        imageCropper = imageCropper,
-//        cropEnable = true,
-//        openImagePicker = openImagePicker,
-//        showGalleryOption = true,
-//        showCameraOption = true,
-//        imagePickerDialogHandler = {
-//            openImagePicker = it
-//        },
-//        selectedImageCallback = { image->
-//            selectedImage = image
-//        }
-//    )
 
     Column (
         modifier = Modifier
@@ -126,7 +132,7 @@ fun AddPost(
         Spacer(Modifier.height(10.dp))
         Text(
             text = "Text",
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(start = 18.dp)
         )
@@ -151,27 +157,26 @@ fun AddPost(
             onImageClick = {
                 when(permissionViewModel.state){
                     PermissionState.Granted -> {
-                        openImagePicker = true
+                        imagePickerLauncher.launch()
                     }
                     PermissionState.DeniedAlways -> {
                         permissionDeniedAlways = true
                     }
                     else -> {
-                        permissionViewModel.provideOrRequestRecordAudioPermission()
+                        permissionViewModel.provideOrRequestImageVideoPermission()
                     }
                 }
             },
             onVideoClick = {
                 when(permissionViewModel.state){
                     PermissionState.Granted -> {
-                        openImagePicker = true
+                        videoPickerLauncher.launch()
                     }
                     PermissionState.DeniedAlways -> {
                         permissionDeniedAlways = true
                     }
                     else -> {
-                        permissionViewModel.provideOrRequestRecordAudioPermission()
-
+                        permissionViewModel.provideOrRequestImageVideoPermission()
                     }
                 }
             }

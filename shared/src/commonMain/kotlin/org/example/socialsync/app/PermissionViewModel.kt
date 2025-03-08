@@ -27,7 +27,7 @@ class PermissionsViewModel(
         }
     }
 
-    fun provideOrRequestRecordAudioPermission() {
+    fun provideOrRequestImageVideoPermission() {
         viewModelScope.launch {
             try {
                 controller.providePermission(Permission.GALLERY)

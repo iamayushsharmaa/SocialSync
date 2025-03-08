@@ -71,9 +71,7 @@ kotlin {
             api(libs.permissions.gallery)
             api(libs.permissions.compose)
             implementation(libs.cmp.image.pick.n.crop)
-
-
-
+            implementation(libs.calf.file.picker)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

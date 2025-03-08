@@ -36,8 +36,6 @@ fun MainScreen(
         PermissionsViewModel(controller)
     }
 
-    var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
-
     Scaffold(
         bottomBar = {
             BottomNavBar(navController = innerNavController)
@@ -58,13 +56,6 @@ fun MainScreen(
                 AddPost(
                     navController = outerNavController,
                     onTagClick = { },
-                    onImagePick = { uris->
-                        selectedMediaUris = selectedMediaUris + uris
-                    },
-                    onVideoPick = { uris->
-                        selectedMediaUris = selectedMediaUris + uris
-                    },
-                    selectedMediaUris = selectedMediaUris,
                     permissionViewModel
                 )
             }
