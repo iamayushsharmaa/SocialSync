@@ -3,6 +3,7 @@ package org.example.socialsync.presentation.main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -17,7 +18,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
@@ -38,25 +41,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil3.compose.AsyncImage
+import coil3.ImageLoader
 import com.mohamedrejeb.calf.core.LocalPlatformContext
 import com.mohamedrejeb.calf.io.KmpFile
 import com.mohamedrejeb.calf.picker.FilePickerFileType
 import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
+import com.mohamedrejeb.calf.picker.coil.KmpFileFetcher
 import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
-import dev.icerock.moko.permissions.PermissionState
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
-import network.chaintech.cmpimagepickncrop.imagecropper.rememberImageCropper
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.app.PermissionsViewModel
 import org.example.socialsync.presentation.main.component.AttachmentRow
+import org.example.socialsync.presentation.main.component.MediaLazyRow
 import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.presentation.main.component.TextInput
 import org.example.socialsync.presentation.main.component.showDatePicker
@@ -88,133 +90,125 @@ fun AddPost(
         type = FilePickerFileType.Image,
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
-            selectedMediaUris = uris
+            scope.launch {
+                selectedMediaUris = uris
+            }
         }
     )
     val videoPickerLauncher = rememberFilePickerLauncher(
         type = FilePickerFileType.Video,
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
-            selectedMediaUris = uris
+            scope.launch {
+                selectedMediaUris = uris
+            }
         }
     )
+
+    val imageLoader = ImageLoader.Builder(coil3.compose.LocalPlatformContext.current)
+        .components { add(KmpFileFetcher.Factory()) }
+        .build()
+
 
     val showBottomSheet = remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = false,
     )
-    val imageCropper = rememberImageCropper()
-    var permissionDeniedAlways by remember { mutableStateOf(false) }
-    var selectedImage by remember { mutableStateOf<ImageBitmap?>(null) }
-    var openImagePicker by remember { mutableStateOf(value = false) }
 
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .background(AppColor.White)
-    ){
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp),
-            verticalAlignment = CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ){
-            SocialsDesign(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .defaultMinSize(100.dp)
-                    .height(60.dp)
-                    .padding(horizontal = 16.dp, vertical = 3.dp)
-                    .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
-            )
-        }
+    Box(modifier = Modifier.fillMaxSize()){
 
-        Spacer(Modifier.height(10.dp))
-        Text(
-            text = "Text",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.padding(start = 18.dp)
-        )
-        TextInput(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp)
-        )
 
-        Spacer(Modifier.height(10.dp))
-        AttachmentRow(
+        Column (
             modifier = Modifier
-                .fillMaxWidth()
-                .height(66.dp)
-                .padding(horizontal = 16.dp, vertical = 6.dp)
-                .background(
-                    shape = RoundedCornerShape(16.dp),
-                    color = AppColor.White
-                ),
-            onTagClick = { onTagClick() },
-            selectedMediaUris = selectedMediaUris,
-            onImageClick = {
-                when(permissionViewModel.state){
-                    PermissionState.Granted -> {
-                        imagePickerLauncher.launch()
-                    }
-                    PermissionState.DeniedAlways -> {
-                        permissionDeniedAlways = true
-                    }
-                    else -> {
-                        permissionViewModel.provideOrRequestImageVideoPermission()
-                    }
-                }
-            },
-            onVideoClick = {
-                when(permissionViewModel.state){
-                    PermissionState.Granted -> {
-                        videoPickerLauncher.launch()
-                    }
-                    PermissionState.DeniedAlways -> {
-                        permissionDeniedAlways = true
-                    }
-                    else -> {
-                        permissionViewModel.provideOrRequestImageVideoPermission()
-                    }
-                }
-            }
-        )
-        if (permissionDeniedAlways){
-            Text(
-                text ="Open Setting to allow permissions!",
+                .fillMaxSize()
+                .statusBarsPadding()
+                .background(AppColor.White).verticalScroll(rememberScrollState())
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp),
-                fontSize = 16.sp,
-                color = AppColor.Black,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center
-            )
-        }
+                    .height(60.dp),
+                verticalAlignment = CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                SocialsDesign(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .defaultMinSize(100.dp)
+                        .height(60.dp)
+                        .padding(horizontal = 16.dp, vertical = 3.dp)
+                        .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
+                )
+            }
 
-        AsyncImage(
-            model = selectedMediaUris,
-            contentDescription = "Selected Image",
-            modifier = Modifier.size(300.dp)
-                .padding(16.dp)
-        )
-        Spacer(Modifier.weight(1f))
+            Spacer(Modifier.height(10.dp))
+            Text(
+                text = "Text",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.padding(start = 18.dp)
+            )
+            TextInput(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+            )
+
+            AttachmentRow(
+                imageLoader = imageLoader,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(66.dp)
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .background(
+                        shape = RoundedCornerShape(16.dp),
+                        color = AppColor.White
+                    ),
+                onTagClick = { onTagClick() },
+                onImageClick = {
+                    imagePickerLauncher.launch()
+                },
+                onVideoClick = {
+                    videoPickerLauncher.launch()
+                }
+            )
+
+            if (selectedMediaUris.isNotEmpty()) {
+                Text(
+                    text = "Selected Media (${selectedMediaUris.size})",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .padding(top = 16.dp, start = 20.dp)
+                )
+                Text(
+                    text = "Slide to see more.",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier
+                        .padding(top = 6.dp, start = 20.dp)
+                )
+                MediaLazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(260.dp)
+                        .padding(top = 16.dp)
+                        .padding(horizontal = 20.dp),
+                    imageLoader = imageLoader,
+                    uris = selectedMediaUris,
+                )
+            }
+
+            Spacer(Modifier.weight(1f))
+        }
         Button(
-            onClick = {
-                showBottomSheet.value = true
-            },
+            onClick = { showBottomSheet.value = true },
             modifier = Modifier
-                .align(Alignment.End)
+                .align(Alignment.BottomEnd) // Fixed at bottom-right
                 .padding(end = 20.dp, bottom = 22.dp)
                 .size(56.dp),
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = AppColor.Black
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = AppColor.Black),
             contentPadding = PaddingValues(0.dp)
         ) {
             Icon(
@@ -347,7 +341,7 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                             text = selectedDate?.toString() ?: "Pick Date",
                             icon = Resource.Icons.DATETIME_ICON,
                             onClick = {
-                               showDatePicker = true
+                                showDatePicker = true
                             }
                         )
                     }

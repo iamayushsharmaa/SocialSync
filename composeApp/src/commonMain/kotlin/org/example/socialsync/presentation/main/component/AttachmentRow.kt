@@ -1,14 +1,10 @@
 package org.example.socialsync.presentation.main.component
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,12 +28,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.ImageLoader
 import coil3.compose.AsyncImage
+import com.mohamedrejeb.calf.core.PlatformContext
 import com.mohamedrejeb.calf.io.KmpFile
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
@@ -45,16 +44,14 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AttachmentRow(
     modifier: Modifier = Modifier,
-    selectedMediaUris: List<KmpFile>,
     onTagClick: () -> Unit,
     onImageClick: () -> Unit,
-    onVideoClick: () -> Unit
+    onVideoClick: () -> Unit,
+    imageLoader: ImageLoader
 ) {
-
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 4.dp, vertical = 4.dp)
     ) {
         Row(
             modifier = Modifier
@@ -83,19 +80,6 @@ fun AttachmentRow(
                 onClick = {
                     onVideoClick()
                 }
-            )
-        }
-
-        AnimatedVisibility(
-            visible = selectedMediaUris.isNotEmpty(),
-            enter = expandVertically() + fadeIn(),
-            exit = shrinkVertically() + fadeOut()
-        ) {
-            MediaPager(
-                uris = selectedMediaUris,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .clip(RoundedCornerShape(12.dp))
             )
         }
     }
@@ -138,57 +122,88 @@ private fun ActionButton(
 }
 
 @Composable
-fun MediaPager(
+fun MediaLazyRow(
     uris: List<KmpFile>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    imageLoader: ImageLoader // Pass as parameter instead of creating inside
 ) {
-    val pagerState = rememberPagerState(pageCount = { uris.size })
-
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(300.dp), // Fixed height for both image and video
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier.fillMaxSize()
-        ) { page ->
-            val uri = uris[page]
-            val isVideo = uri.toString().endsWith(".mp4") || uri.toString().endsWith(".mov")
-
-            if (isVideo) {
-                VideoPreview(uri)
-            } else {
-                ImagePreview(uri)
+    LazyRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(14.dp)
+        ) {
+            itemsIndexed(uris) { _, uri ->
+                val isVideo = uri.toString().endsWith(".mp4") || uri.toString().endsWith(".mov")
+                Card(
+                    modifier = Modifier
+                        .width(330.dp)
+                        .height(260.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                ) {
+                    if (isVideo) {
+                        VideoPreview(
+                            modifier = Modifier.fillMaxSize(),
+                            uri = uri,
+                            imageLoader = imageLoader
+                        )
+                    } else {
+                        ImagePreview(
+                            modifier = Modifier.fillMaxSize(),
+                            uri = uri,
+                            imageLoader = imageLoader
+                        )
+                    }
+                }
             }
-        }
+
     }
 }
 
 @Composable
-fun ImagePreview(uri: KmpFile) {
+fun ImagePreview(
+    modifier: Modifier = Modifier,
+    uri: KmpFile,
+    imageLoader: ImageLoader
+) {
     AsyncImage(
+        modifier = modifier,
         model = uri,
-        contentDescription = "Selected Image",
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop
+        imageLoader = imageLoader,
+        contentDescription = "Image Preview",
+        contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
-fun VideoPreview(uri: KmpFile) {
+fun VideoPreview(
+    modifier: Modifier = Modifier,
+    uri: KmpFile,
+    imageLoader: ImageLoader
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black),
         contentAlignment = Alignment.Center
     ) {
-        Icon(
-            painter = painterResource(Resource.Icons.EYE_CLOSED),
+        AsyncImage(
+            model = uri,
             contentDescription = "Video Preview",
-            tint = Color.White,
-            modifier = Modifier.size(48.dp)
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+            imageLoader = imageLoader
+        )
+        Icon(
+            painter = painterResource(Resource.Icons.ADD_BLANK),
+            contentDescription = "Play",
+            tint = Color.Black,
+            modifier = Modifier.size(70.dp)
         )
     }
 }
+
