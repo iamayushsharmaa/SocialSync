@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -81,9 +82,10 @@ fun AddPost(
         skipPartiallyExpanded = false,
     )
     val imageCropper = rememberImageCropper()
+    var permissionDeniedAlways by remember { mutableStateOf(false) }
     var selectedImage by remember { mutableStateOf<ImageBitmap?>(null) }
     var openImagePicker by remember { mutableStateOf(value = false) }
-//
+
 //    CMPImagePickNCropDialog(
 //        imageCropper = imageCropper,
 //        cropEnable = true,
@@ -152,7 +154,7 @@ fun AddPost(
                         openImagePicker = true
                     }
                     PermissionState.DeniedAlways -> {
-
+                        permissionDeniedAlways = true
                     }
                     else -> {
                         permissionViewModel.provideOrRequestRecordAudioPermission()
@@ -165,14 +167,27 @@ fun AddPost(
                         openImagePicker = true
                     }
                     PermissionState.DeniedAlways -> {
-
+                        permissionDeniedAlways = true
                     }
                     else -> {
                         permissionViewModel.provideOrRequestRecordAudioPermission()
+
                     }
                 }
             }
         )
+        if (permissionDeniedAlways){
+            Text(
+                text ="Open Setting to allow permissions!",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
+                fontSize = 16.sp,
+                color = AppColor.Black,
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center
+            )
+        }
         Spacer(Modifier.weight(1f))
         Button(
             onClick = {
