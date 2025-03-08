@@ -115,6 +115,7 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.protolite.well.known.types)
     implementation(libs.places)
+    implementation(libs.androidx.media3.common.ktx)
     debugImplementation(compose.uiTooling)
 }
 

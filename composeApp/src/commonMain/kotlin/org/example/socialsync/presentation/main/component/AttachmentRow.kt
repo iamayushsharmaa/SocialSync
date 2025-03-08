@@ -36,6 +36,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.mohamedrejeb.calf.io.KmpFile
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
@@ -44,7 +45,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AttachmentRow(
     modifier: Modifier = Modifier,
-    selectedMediaUris: List<String>,
+    selectedMediaUris: List<KmpFile>,
     onTagClick: () -> Unit,
     onImageClick: () -> Unit,
     onVideoClick: () -> Unit
@@ -138,7 +139,7 @@ private fun ActionButton(
 
 @Composable
 fun MediaPager(
-    uris: List<String>,
+    uris: List<KmpFile>,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { uris.size })
@@ -166,7 +167,7 @@ fun MediaPager(
 }
 
 @Composable
-fun ImagePreview(uri: String) {
+fun ImagePreview(uri: KmpFile) {
     AsyncImage(
         model = uri,
         contentDescription = "Selected Image",
@@ -176,7 +177,7 @@ fun ImagePreview(uri: String) {
 }
 
 @Composable
-fun VideoPreview(uri: String) {
+fun VideoPreview(uri: KmpFile) {
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -44,7 +44,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil3.compose.AsyncImage
 import com.mohamedrejeb.calf.core.LocalPlatformContext
+import com.mohamedrejeb.calf.io.KmpFile
 import com.mohamedrejeb.calf.picker.FilePickerFileType
 import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
 import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
@@ -80,20 +82,20 @@ fun AddPost(
     val scope = rememberCoroutineScope()
     val context = LocalPlatformContext.current
 
-    var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
+    var selectedMediaUris by remember { mutableStateOf<List<KmpFile>>(emptyList()) }
 
     val imagePickerLauncher = rememberFilePickerLauncher(
         type = FilePickerFileType.Image,
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
-            selectedMediaUris = uris.map { it.toString() }
+            selectedMediaUris = uris
         }
     )
     val videoPickerLauncher = rememberFilePickerLauncher(
         type = FilePickerFileType.Video,
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
-            selectedMediaUris = uris.map { it.toString() }
+            selectedMediaUris = uris
         }
     )
 
@@ -193,6 +195,13 @@ fun AddPost(
                 textAlign = TextAlign.Center
             )
         }
+
+        AsyncImage(
+            model = selectedMediaUris,
+            contentDescription = "Selected Image",
+            modifier = Modifier.size(300.dp)
+                .padding(16.dp)
+        )
         Spacer(Modifier.weight(1f))
         Button(
             onClick = {
