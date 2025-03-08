@@ -70,6 +70,8 @@ kotlin {
             api(libs.permissions)
             api(libs.permissions.gallery)
             api(libs.permissions.compose)
+            implementation(libs.cmp.image.pick.n.crop)
+
 
 
         }

@@ -49,6 +49,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
+            api(libs.permissions)
+            api(libs.permissions.gallery)
+            api(libs.permissions.compose)
 
         }
 

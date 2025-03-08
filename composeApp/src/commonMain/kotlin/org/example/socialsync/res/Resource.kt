@@ -5,7 +5,6 @@ import socialsync.composeapp.generated.resources.add_icon
 import socialsync.composeapp.generated.resources.analysis_blank
 import socialsync.composeapp.generated.resources.analysis_filled
 import socialsync.composeapp.generated.resources.attach_icon
-import socialsync.composeapp.generated.resources.back_arrow_icon
 import socialsync.composeapp.generated.resources.back_icon
 import socialsync.composeapp.generated.resources.back_iconn
 import socialsync.composeapp.generated.resources.draft_blank

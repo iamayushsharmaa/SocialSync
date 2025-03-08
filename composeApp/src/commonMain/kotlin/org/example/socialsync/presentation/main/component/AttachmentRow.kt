@@ -20,14 +20,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,8 +36,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import org.example.socialsync.MediaPicker
-import org.example.socialsync.app.App
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
@@ -48,11 +44,10 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun AttachmentRow(
     modifier: Modifier = Modifier,
-    mediaPicker: MediaPicker,
     selectedMediaUris: List<String>,
     onTagClick: () -> Unit,
-    onImagePicked: (List<String>) -> Unit,
-    onVideoPicked: (List<String>) -> Unit
+    onImageClick: () -> Unit,
+    onVideoClick: () -> Unit
 ) {
 
     Column(
@@ -73,7 +68,7 @@ fun AttachmentRow(
                 contentDescription = "Pick Image",
                 text = "Image",
                 onClick = {
-                    mediaPicker.launchVideoPicker(onImagePicked)
+                    onImageClick()
                 }
             )
             Spacer(Modifier.width(12.dp))
@@ -84,7 +79,9 @@ fun AttachmentRow(
                 icon = Resource.Icons.ATTACH_ICON,
                 text = "Video",
                 contentDescription = "Pick Video",
-                onClick = { mediaPicker.launchVideoPicker(onVideoPicked) }
+                onClick = {
+                    onVideoClick()
+                }
             )
         }
 

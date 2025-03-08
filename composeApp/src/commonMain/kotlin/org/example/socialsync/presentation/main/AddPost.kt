@@ -26,6 +26,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,14 +37,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import dev.icerock.moko.permissions.PermissionState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
-import org.example.socialsync.MediaPicker
+import network.chaintech.cmpimagepickncrop.imagecropper.rememberImageCropper
 import org.example.socialsync.app.AppColor
+import org.example.socialsync.app.PermissionsViewModel
 import org.example.socialsync.presentation.main.component.AttachmentRow
 import org.example.socialsync.presentation.main.component.SocialsDesign
 import org.example.socialsync.presentation.main.component.TextInput
@@ -52,23 +58,45 @@ import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import socialsync.composeapp.generated.resources.Res
 import socialsync.composeapp.generated.resources.choose_one
 import socialsync.composeapp.generated.resources.draft
 import socialsync.composeapp.generated.resources.post_now
 import socialsync.composeapp.generated.resources.schedule
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPost(
     navController: NavHostController,
     onTagClick: () -> Unit,
     onImagePick: (List<String>) -> Unit,
     onVideoPick: (List<String>) -> Unit,
-    mediaPicker: MediaPicker,
     selectedMediaUris: List<String>,
+    permissionViewModel: PermissionsViewModel,
 ) {
 
     val showBottomSheet = remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false,
+    )
+    val imageCropper = rememberImageCropper()
+    var selectedImage by remember { mutableStateOf<ImageBitmap?>(null) }
+    var openImagePicker by remember { mutableStateOf(value = false) }
+//
+//    CMPImagePickNCropDialog(
+//        imageCropper = imageCropper,
+//        cropEnable = true,
+//        openImagePicker = openImagePicker,
+//        showGalleryOption = true,
+//        showCameraOption = true,
+//        imagePickerDialogHandler = {
+//            openImagePicker = it
+//        },
+//        selectedImageCallback = { image->
+//            selectedImage = image
+//        }
+//    )
 
     Column (
         modifier = Modifier
@@ -118,12 +146,31 @@ fun AddPost(
                 ),
             onTagClick = { onTagClick() },
             selectedMediaUris = selectedMediaUris,
-            mediaPicker = mediaPicker,
-            onImagePicked = { uris->
-                onImagePick(uris)
+            onImageClick = {
+                when(permissionViewModel.state){
+                    PermissionState.Granted -> {
+                        openImagePicker = true
+                    }
+                    PermissionState.DeniedAlways -> {
+
+                    }
+                    else -> {
+                        permissionViewModel.provideOrRequestRecordAudioPermission()
+                    }
+                }
             },
-            onVideoPicked = { uris->
-                onVideoPick(uris)
+            onVideoClick = {
+                when(permissionViewModel.state){
+                    PermissionState.Granted -> {
+                        openImagePicker = true
+                    }
+                    PermissionState.DeniedAlways -> {
+
+                    }
+                    else -> {
+                        permissionViewModel.provideOrRequestRecordAudioPermission()
+                    }
+                }
             }
         )
         Spacer(Modifier.weight(1f))
@@ -150,6 +197,7 @@ fun AddPost(
         }
         if (showBottomSheet.value) {
             PostOptionsBottomSheet(
+                sheetState,
                 onDismiss = { showBottomSheet.value = false }
             )
         }
@@ -159,7 +207,7 @@ fun AddPost(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
+private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit) {
 
     var selectedOption by remember { mutableStateOf<String?>(null) }
     var showDateTime by remember { mutableStateOf(false) }
@@ -196,6 +244,7 @@ private fun PostOptionsBottomSheet(onDismiss: () -> Unit) {
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
+        sheetState = sheetState,
         containerColor = AppColor.White
     ) {
         Column(

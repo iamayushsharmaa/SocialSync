@@ -8,14 +8,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.icerock.moko.permissions.compose.BindEffect
+import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
+import org.example.socialsync.app.PermissionsViewModel
 import org.example.socialsync.presentation.main.AddPost
 import org.example.socialsync.presentation.main.Draft
 import org.example.socialsync.presentation.main.Home
-import org.example.socialsync.rememberMediaPicker
 
 
 @Composable
@@ -24,9 +27,16 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val innerNavController = rememberNavController()
+    val factory = rememberPermissionsControllerFactory()
+    val controller = remember (factory){
+        factory.createPermissionsController()
+    }
+    BindEffect(controller)
+    val permissionViewModel = viewModel{
+        PermissionsViewModel(controller)
+    }
 
     var selectedMediaUris by remember { mutableStateOf<List<String>>(emptyList()) }
-    val mediaPicker = rememberMediaPicker()
 
     Scaffold(
         bottomBar = {
@@ -55,7 +65,7 @@ fun MainScreen(
                         selectedMediaUris = selectedMediaUris + uris
                     },
                     selectedMediaUris = selectedMediaUris,
-                    mediaPicker = mediaPicker
+                    permissionViewModel
                 )
             }
             composable(BottomNavItem.Draft.route) {
