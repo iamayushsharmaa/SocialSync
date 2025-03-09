@@ -43,65 +43,7 @@ fun Home(navController: NavHostController) {
             .fillMaxSize()
             .background(Color.White),
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    Icon(
-                        painter = painterResource(Resource.Icons.MENU_ICON),
-                        contentDescription = "Menu",
-                        tint = Color.Black,
-                        modifier = Modifier
-                            .padding(horizontal = 12.dp)
-                            .clickable { /* Handle drawer click */ }
-                    )
-                },
-                title = {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable{
-
-                            },
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                painter = painterResource(Resource.Icons.INSTAGRAM),
-                                contentDescription = "connection icon",
-                                tint = Color.Black,
-                                modifier = Modifier
-                                    .size(30.dp)
-                                    .clip(shape = CircleShape)
-                                    .padding(5.dp)
-                            )
-                            Text(
-                                text = "Netfreak",
-                                fontSize = 18.sp,
-                                modifier = Modifier.padding(start = 4.dp),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-                },
-                actions = {
-                    Text(
-                        text = "Upgrade",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(end = 8.dp)
-                            .clickable { /* Handle upgrade click */ },
-                        color = Color.Black
-                    )
-                },
-                modifier = Modifier.fillMaxWidth(),
-                backgroundColor = Color.White
-            )
+            TopAppBar(title = "Netfreak")
         }
     ) { paddingValues ->
         Column (
@@ -142,3 +84,71 @@ fun Home(navController: NavHostController) {
         }
     }
 }
+
+@Composable
+fun TopAppBar(
+    modifier: Modifier = Modifier,
+    title: String
+) {
+    TopAppBar(
+        navigationIcon = {
+            Icon(
+                painter = painterResource(Resource.Icons.MENU_ICON),
+                contentDescription = "Menu",
+                tint = Color.Black,
+                modifier = Modifier
+                    .padding(horizontal = 12.dp)
+                    .clickable { /* Handle drawer click */ }
+            )
+        },
+        title = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable{
+
+                    },
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(Resource.Icons.INSTAGRAM),
+                        contentDescription = "connection icon",
+                        tint = Color.Black,
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clip(shape = CircleShape)
+                            .padding(5.dp)
+                    )
+                    Text(
+                        text = title,
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(start = 4.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        },
+        actions = {
+            Text(
+                text = "Upgrade",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .clickable { /* Handle upgrade click */ },
+                color = Color.Black
+            )
+        },
+        modifier = Modifier.fillMaxWidth(),
+        backgroundColor = Color.White
+    )
+
+}
+

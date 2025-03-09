@@ -153,7 +153,6 @@ fun AddPost(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             )
-
             AttachmentRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -231,7 +230,6 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
 
     var selectedOption by remember { mutableStateOf<String?>(null) }
     var showDateTime by remember { mutableStateOf(false) }
-
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
     var selectedTime by remember { mutableStateOf<LocalTime?>(null) }
     var showDatePicker by remember { mutableStateOf(false) }
@@ -261,7 +259,6 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
             },
         )
     }
-
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
@@ -308,7 +305,6 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                     showDateTime = true
                 }
             )
-
             if(selectedOption == "Schedule"){
                 Row (
                     modifier = Modifier
@@ -343,7 +339,6 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                         )
                     }
                     Spacer(Modifier.width(9.dp))
-
                     Column (
                         modifier = Modifier
                             .fillMaxHeight()
