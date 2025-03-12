@@ -1,4 +1,4 @@
-package org.example.socialsync.data.posts
+package org.example.socialsync.data.posts.data
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
@@ -8,13 +8,11 @@ import kotlinx.serialization.Serializable
 data class PostRequest(
     val postId : String,
     val text: String?,
-    val media: List<String>?,
+    val media: List<String>? = emptyList(),
     val date: LocalDate?,
     val time: LocalTime?,
-    val socials: List<Socials>,
+    val status: PostStatus,
+    val createdAt: Long,
+    val updatedAt: Long,
+    val socials: List<SocialPlatform>,
 )
-
-enum class Socials{
-    INSTAGRAM,
-    X
-}
