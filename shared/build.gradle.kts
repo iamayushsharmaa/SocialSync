@@ -38,12 +38,10 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.logging)
-
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
-
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -52,6 +50,8 @@ kotlin {
             api(libs.permissions)
             api(libs.permissions.gallery)
             api(libs.permissions.compose)
+            implementation(libs.kotlinx.datetime)
+
 
         }
 

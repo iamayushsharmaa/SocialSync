@@ -33,7 +33,7 @@ fun Setting(navController: NavHostController) {
                 .statusBarsPadding()
                 .padding(horizontal = 16.dp)
         ){
-
+            Spacer(Modifier.height(12.dp))
         }
     }
 }
