@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -29,15 +31,16 @@ import org.example.socialsync.res.Resource.Images.EGYPT_PHOTO
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ScheduledPostDesign() {
+fun ScheduledPostDesign(
+    modifier: Modifier = Modifier
+) {
     Column (
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(260.dp)
-            .padding(horizontal = 8.dp, vertical = 6.dp)
+            .padding(horizontal = 8.dp, vertical = 8.dp)
             .background(color = Color.White)
-            .border(width = 1.dp,shape = RoundedCornerShape(24.dp), color = AppColor.BlackFade)
-        ,
+            .border(width = 1.dp,shape = RoundedCornerShape(24.dp), color = AppColor.Gray)
     ){
         Row (
             modifier = Modifier
@@ -82,7 +85,9 @@ fun ScheduledPostDesign() {
             fontSize = 15.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Black,
+            maxLines = 3,
             modifier = Modifier
+                .wrapContentHeight()
                 .padding(horizontal = 18.dp, vertical = 6.dp)
         )
         Spacer(Modifier.height(14.dp))
@@ -93,8 +98,9 @@ fun ScheduledPostDesign() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp)
+                .padding(horizontal = 16.dp, vertical = 5.dp)
                 .background(shape = RoundedCornerShape(24.dp),color = Color.Transparent)
-                .padding(horizontal = 8.dp, vertical = 5.dp),
+
         )
     }
 }
