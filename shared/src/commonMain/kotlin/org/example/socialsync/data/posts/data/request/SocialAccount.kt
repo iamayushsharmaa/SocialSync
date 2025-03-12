@@ -1,4 +1,4 @@
-package org.example.socialsync.data.posts.data
+package org.example.socialsync.data.posts.data.request
 
 data class SocialAccount(
     val id: String,
