@@ -152,6 +152,5 @@ fun TopAppBar(
         modifier = Modifier.fillMaxWidth(),
         backgroundColor = Color.White
     )
-
 }
 
