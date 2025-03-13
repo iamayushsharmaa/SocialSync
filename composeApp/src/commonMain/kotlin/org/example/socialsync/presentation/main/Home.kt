@@ -70,17 +70,20 @@ fun Home(navController: NavHostController) {
                 modifier = Modifier
                     .padding(start = 16.dp, top = 16.dp)
             )
-
             Spacer(Modifier.height(8.dp))
             LazyColumn (
                 modifier = Modifier
                     .fillMaxSize()
             ){
                 items(2){
-                    ScheduledPostDesign()
+                    ScheduledPostDesign(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(260.dp)
+                            .background(color = Color.White)
+                    )
                 }
             }
-
         }
     }
 }

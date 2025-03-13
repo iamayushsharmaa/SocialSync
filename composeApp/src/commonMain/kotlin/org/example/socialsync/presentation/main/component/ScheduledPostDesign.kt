@@ -36,10 +36,7 @@ fun ScheduledPostDesign(
 ) {
     Column (
         modifier = modifier
-            .fillMaxWidth()
-            .height(260.dp)
             .padding(horizontal = 8.dp, vertical = 8.dp)
-            .background(color = Color.White)
             .border(width = 1.dp,shape = RoundedCornerShape(24.dp), color = AppColor.Gray)
     ){
         Row (
@@ -78,7 +75,6 @@ fun ScheduledPostDesign(
             )
             Spacer(Modifier.weight(1f))
         }
-
         Spacer(Modifier.height(16.dp))
         Text(
             text = "caption or tweet...",
@@ -100,7 +96,6 @@ fun ScheduledPostDesign(
                 .height(140.dp)
                 .padding(horizontal = 16.dp, vertical = 5.dp)
                 .background(shape = RoundedCornerShape(24.dp),color = Color.Transparent)
-
         )
     }
 }
