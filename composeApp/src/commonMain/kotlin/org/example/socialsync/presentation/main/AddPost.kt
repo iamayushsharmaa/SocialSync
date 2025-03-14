@@ -116,8 +116,6 @@ fun AddPost(
     )
 
     Box(modifier = Modifier.fillMaxSize()){
-
-
         Column (
             modifier = Modifier
                 .fillMaxSize()
@@ -140,7 +138,6 @@ fun AddPost(
                         .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
                 )
             }
-
             Spacer(Modifier.height(10.dp))
             Text(
                 text = "Text",
