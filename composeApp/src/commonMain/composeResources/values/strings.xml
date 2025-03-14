@@ -34,7 +34,7 @@
     <string name="analysis">Analysis</string>
     <string name="settings">Settings</string>
 
-    <string name = "choose_one">Choose your best time.</string>
+    <string name = "choose_one">Choose time to post</string>
     <string name = "schedule">Schedule</string>
     <string name= "draft">Draft</string>
     <string name= "post_now">Post now</string>
