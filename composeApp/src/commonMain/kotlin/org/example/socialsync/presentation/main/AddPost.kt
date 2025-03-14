@@ -138,7 +138,7 @@ fun AddPost(
                         .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
                 )
             }
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(6.dp))
             Text(
                 text = "Text",
                 fontSize = 18.sp,
@@ -148,7 +148,7 @@ fun AddPost(
             TextInput(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
             )
             AttachmentRow(
                 modifier = Modifier
