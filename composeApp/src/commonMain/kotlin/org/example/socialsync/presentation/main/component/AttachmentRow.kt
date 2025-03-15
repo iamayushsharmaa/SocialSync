@@ -132,8 +132,8 @@ fun MediaLayout(
                 val isVideo = uri.toString().endsWith(".mp4") || uri.toString().endsWith(".mov")
                 Card(
                     modifier = Modifier
-                        .width(330.dp)
-                        .height(260.dp),
+                        .width(360.dp)
+                        .height(250.dp),
                     shape = RoundedCornerShape(24.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = Color.White
