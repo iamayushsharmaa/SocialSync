@@ -109,7 +109,6 @@ fun AddPost(
         .components { add(KmpFileFetcher.Factory()) }
         .build()
 
-
     val showBottomSheet = remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = false,

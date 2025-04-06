@@ -153,4 +153,3 @@ fun TopAppBar(
         backgroundColor = Color.White
     )
 }
-

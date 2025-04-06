@@ -1,6 +1,6 @@
 [versions]
 accompanistPager = "0.34.0"
-agp = "8.9.0"
+agp = "8.9.1"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
