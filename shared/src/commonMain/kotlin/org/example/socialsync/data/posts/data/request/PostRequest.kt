@@ -15,5 +15,5 @@ data class PostRequest(
     val status: PostStatus,
     val createdAt: Long,
     val updatedAt: Long,
-    val socials: List<SocialPlatform>,
+    val socials: List<SocialPlatform>
 )

@@ -37,7 +37,6 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun Home(navController: NavHostController) {
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
