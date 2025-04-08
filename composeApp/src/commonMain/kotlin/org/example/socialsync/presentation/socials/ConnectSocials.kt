@@ -109,7 +109,7 @@ fun ConnectSocials(
         ConnectButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(58.dp)
+                .height(60.dp)
                 .padding(horizontal = 16.dp)
                 .background(shape = RoundedCornerShape(12.dp), color = AppColor.BlackFade),
             icon = Resource.Icons.X,
