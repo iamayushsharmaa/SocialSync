@@ -5,6 +5,7 @@ import org.example.socialsync.core.domain.Result
 import org.example.socialsync.data.auth.api.AuthApiService
 import org.example.socialsync.data.auth.model.AuthRequest
 import org.example.socialsync.data.auth.model.TokenResponse
+import org.example.socialsync.data.auth.model.User
 
 
 class AuthRepositoryImpl(
@@ -16,5 +17,9 @@ class AuthRepositoryImpl(
 
     override suspend fun signIn(email: String, password: String): Result<TokenResponse, DataError.Remote> {
         return apiService.signIn(AuthRequest(email, password))
+    }
+
+    override suspend fun getUser(userId: String): Result<User, DataError.Remote> {
+        TODO("Not yet implemented")
     }
 }
