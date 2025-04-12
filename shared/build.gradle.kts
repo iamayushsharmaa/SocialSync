@@ -51,8 +51,6 @@ kotlin {
             api(libs.permissions.gallery)
             api(libs.permissions.compose)
             implementation(libs.kotlinx.datetime)
-
-
         }
 
         val jvmMain by getting {

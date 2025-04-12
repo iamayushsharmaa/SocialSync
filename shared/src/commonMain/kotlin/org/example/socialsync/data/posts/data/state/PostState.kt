@@ -32,3 +32,8 @@ sealed class PostIntent {
     data class RemoveSocial(val social: SocialPlatform) : PostIntent()
     object SubmitPost : PostIntent()
 }
+
+sealed class PostEffect {
+    object PostSubmittedSuccessfully : PostEffect()
+    data class ShowError(val message: String) : PostEffect()
+}
