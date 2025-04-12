@@ -47,7 +47,6 @@ class PostViewModel(
 
     private fun submitPost() {
         val currentState = _state.value
-
         if (currentState.postId.isBlank() || currentState.userId.isBlank()) {
             coroutineScope.launch {
                 _effect.emit(PostEffect.ShowError("Post ID and User ID are required"))
@@ -71,7 +70,7 @@ class PostViewModel(
                 socials = currentState.socials
             )
 
-            val result = repository.submitPost(postRequest)
+            val result = repository.createPost(postRequest)
             updateState { copy(isLoading = false) }
 
             result.fold(
@@ -80,8 +79,8 @@ class PostViewModel(
                     _effect.emit(PostEffect.PostSubmittedSuccessfully)
                 },
                 onFailure = { error ->
-                    updateState { copy(error = error.message) }
-                    _effect.emit(PostEffect.ShowError(error.message ?: "Unknown error"))
+                    updateState { copy(error = error.toString()) }
+                    _effect.emit(PostEffect.ShowError(error.toString()))
                 }
             )
         }

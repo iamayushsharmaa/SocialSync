@@ -109,6 +109,24 @@ class SocialMediaRepositoryImpl (
         }
     }
 
+    override suspend fun deletePost(postId: String): Result<Unit, DataError.Remote> {
+        return withContext(Dispatchers.Default) {
+            try {
+                socialApi.deletePost(postId)
+                Result.Success(Unit)
+            } catch (e: ClientRequestException) {
+                when (e.response.status) {
+                    HttpStatusCode.NotFound -> Result.Error(DataError.Remote.NO_INTERNET)
+                    else -> Result.Error(DataError.Remote.UNKNOWN)
+                }
+            } catch (e: HttpRequestTimeoutException) {
+                Result.Error(DataError.Remote.NO_INTERNET)
+            } catch (e: Exception) {
+                Result.Error(DataError.Remote.UNKNOWN)
+            }
+        }
+    }
+
     override suspend fun saveDraft(post: PostRequest): PostRequest {
         return withContext(Dispatchers.Default) {
             try {

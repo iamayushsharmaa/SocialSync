@@ -14,5 +14,6 @@ interface SocialMediaRepository {
     suspend fun updatePost(post: PostRequest): Result<PostRequest, DataError.Remote>
     suspend fun getPosts(userId: String, status: PostStatus?): Result<PostResponse, DataError.Remote>
     suspend fun publishPostNow(postId: String, platforms: List<SocialPlatform>) : Result<Unit, DataError.Remote>
+    suspend fun deletePost(postId: String): Result<Unit, DataError.Remote>
     suspend fun saveDraft(post: PostRequest): PostRequest
 }
