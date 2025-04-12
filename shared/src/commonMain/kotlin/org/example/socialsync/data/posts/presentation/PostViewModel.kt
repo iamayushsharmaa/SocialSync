@@ -19,11 +19,9 @@ class PostViewModel(
     private val repository: SocialMediaRepository,
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) {
-    // State
     private val _state = MutableStateFlow(PostState())
     val state: StateFlow<PostState> = _state.asStateFlow()
 
-    // Effects
     private val _effect = MutableSharedFlow<PostEffect>()
     val effect = _effect.asSharedFlow()
 
@@ -49,7 +47,7 @@ class PostViewModel(
 
     private fun submitPost() {
         val currentState = _state.value
-        // Basic validation
+
         if (currentState.postId.isBlank() || currentState.userId.isBlank()) {
             coroutineScope.launch {
                 _effect.emit(PostEffect.ShowError("Post ID and User ID are required"))
