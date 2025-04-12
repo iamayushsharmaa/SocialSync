@@ -34,13 +34,12 @@ interface SocialApi {
     suspend fun deletePost(postId: String): Unit
 }
 
-
 class SocialApiImpl (
     private val httpClient: HttpClient
 ): SocialApi {
 
     override suspend fun getSocialAccounts(userId: String): List<SocialAccount> {
-        return httpClient.get("$baseUrl/social-accounts") {
+        return httpClient.get("$baseUrl/socialaccounts") {
             parameter("userId", userId)
         }.body()
     }
