@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.example.socialsync.core.domain.onError
+import org.example.socialsync.core.domain.onSuccess
 import org.example.socialsync.data.posts.data.request.PostRequest
 import org.example.socialsync.data.posts.data.state.PostEffect
 import org.example.socialsync.data.posts.data.state.PostIntent
@@ -73,16 +75,15 @@ class PostViewModel(
             val result = repository.createPost(postRequest)
             updateState { copy(isLoading = false) }
 
-            result.fold(
-                onSuccess = {
+            result
+                .onSuccess { createdPost ->
                     updateState { copy(isPostSubmitted = true) }
                     _effect.emit(PostEffect.PostSubmittedSuccessfully)
-                },
-                onFailure = { error ->
-                    updateState { copy(error = error.toString()) }
-                    _effect.emit(PostEffect.ShowError(error.toString()))
                 }
-            )
+                .onError { dataError ->
+                    updateState { copy(error = dataError.toString()) }
+                    _effect.emit(PostEffect.ShowError(dataError.toString()))
+                }
         }
     }
 }
