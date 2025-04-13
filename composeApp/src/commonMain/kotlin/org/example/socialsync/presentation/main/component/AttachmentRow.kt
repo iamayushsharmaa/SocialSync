@@ -118,7 +118,7 @@ private fun ActionButton(
 
 @Composable
 fun MediaLayout(
-    uris: List<KmpFile>,
+    uris: List<String>,
     modifier: Modifier = Modifier,
     imageLoader: ImageLoader
 ) {
@@ -162,7 +162,7 @@ fun MediaLayout(
 @Composable
 fun ImagePreview(
     modifier: Modifier = Modifier,
-    uri: KmpFile,
+    uri: String,
     imageLoader: ImageLoader
 ) {
     AsyncImage(
@@ -177,7 +177,7 @@ fun ImagePreview(
 @Composable
 fun VideoPreview(
     modifier: Modifier = Modifier,
-    uri: KmpFile,
+    uri: String,
     imageLoader: ImageLoader
 ) {
     Box(

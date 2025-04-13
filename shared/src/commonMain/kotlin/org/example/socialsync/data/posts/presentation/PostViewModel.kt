@@ -1,5 +1,6 @@
 package org.example.socialsync.data.posts.presentation
 
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +21,7 @@ import org.example.socialsync.data.posts.domain.SocialMediaRepository
 class PostViewModel(
     private val repository: SocialMediaRepository,
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
-) {
+) : ViewModel() {
     private val _state = MutableStateFlow(PostState())
     val state: StateFlow<PostState> = _state.asStateFlow()
 
@@ -39,6 +40,9 @@ class PostViewModel(
             is PostIntent.UpdateStatus -> updateState { copy(status = intent.status) }
             is PostIntent.AddSocial -> updateState { copy(socials = socials + intent.social) }
             is PostIntent.RemoveSocial -> updateState { copy(socials = socials - intent.social) }
+            is PostIntent.ShowDatePicker -> updateState { copy(showDatePicker = intent.showDatePicker) }
+            is PostIntent.ShowTimePicker -> updateState { copy(showTimePicker = intent.showTimePicker) }
+            is PostIntent.ShowDateTime -> updateState { copy(showDateTime = intent.showDateTime) }
             is PostIntent.SubmitPost -> submitPost()
         }
     }

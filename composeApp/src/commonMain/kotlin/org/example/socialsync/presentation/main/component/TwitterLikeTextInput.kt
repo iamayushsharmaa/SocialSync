@@ -34,10 +34,11 @@ import org.example.socialsync.app.AppColor
 @Composable
 fun TextInput(
     modifier: Modifier = Modifier,
-    maxWords: Int = 280, // Twitter-like word limit
-    minHeight: Dp = 120.dp // Minimum height for the input
+    maxWords: Int = 280,
+    minHeight: Dp = 120.dp,
+    text : String = "",
+    onValueChange: (String) -> Unit
 ) {
-    var text by remember { mutableStateOf("") }
     val words = text.split("\\s+".toRegex()).filter { it.isNotEmpty() }
     val wordCount = words.size
     val isOverLimit = wordCount > maxWords
@@ -64,7 +65,7 @@ fun TextInput(
                 onValueChange = { newText ->
                     val newWords = newText.split("\\s+".toRegex()).filter { it.isNotEmpty() }
                     if (newWords.size <= maxWords || newText.length < text.length) {
-                        text = newText
+                        onValueChange(newText)
                     }
                 },
                 modifier = Modifier

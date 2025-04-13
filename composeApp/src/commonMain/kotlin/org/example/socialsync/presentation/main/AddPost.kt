@@ -32,6 +32,7 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +49,7 @@ import androidx.navigation.NavHostController
 import coil3.ImageLoader
 import com.mohamedrejeb.calf.core.LocalPlatformContext
 import com.mohamedrejeb.calf.io.KmpFile
+import com.mohamedrejeb.calf.io.getPath
 import com.mohamedrejeb.calf.picker.FilePickerFileType
 import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
 import com.mohamedrejeb.calf.picker.coil.KmpFileFetcher
@@ -57,6 +59,9 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import org.example.socialsync.app.AppColor
 import org.example.socialsync.app.PermissionsViewModel
+import org.example.socialsync.data.auth.presentaion.AuthViewModel
+import org.example.socialsync.data.posts.data.state.PostIntent
+import org.example.socialsync.data.posts.presentation.PostViewModel
 import org.example.socialsync.presentation.main.component.AttachmentRow
 import org.example.socialsync.presentation.main.component.MediaLayout
 import org.example.socialsync.presentation.main.component.SocialsDesign
@@ -67,6 +72,8 @@ import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.viewmodel.getViewModelKey
 import socialsync.composeapp.generated.resources.Res
 import socialsync.composeapp.generated.resources.choose_one
 import socialsync.composeapp.generated.resources.draft
@@ -78,8 +85,11 @@ import socialsync.composeapp.generated.resources.schedule
 fun AddPost(
     navController: NavHostController,
     onTagClick: () -> Unit,
-    permissionViewModel: PermissionsViewModel,
+    permissionViewModel: PermissionsViewModel
 ) {
+
+    val postViewModel = koinViewModel<PostViewModel>()
+    val state by postViewModel.state.collectAsState()
 
     val scope = rememberCoroutineScope()
     val context = LocalPlatformContext.current
@@ -91,7 +101,8 @@ fun AddPost(
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
             scope.launch {
-                selectedMediaUris = uris
+                val media = uris.map { it.toString() }
+                postViewModel.handleIntent(PostIntent.AddMedia(media))
             }
         }
     )
@@ -100,7 +111,8 @@ fun AddPost(
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
             scope.launch {
-                selectedMediaUris = uris
+                val media = uris.map { it.toString() }
+                postViewModel.handleIntent(PostIntent.AddMedia(media))
             }
         }
     )
@@ -145,6 +157,8 @@ fun AddPost(
                 modifier = Modifier.padding(start = 18.dp)
             )
             TextInput(
+                text = state.text,
+                onValueChange = { postViewModel.handleIntent(PostIntent.UpdateText(it)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 6.dp)
@@ -189,7 +203,7 @@ fun AddPost(
                         .padding(top = 16.dp)
                         .padding(horizontal = 20.dp),
                     imageLoader = imageLoader,
-                    uris = selectedMediaUris,
+                    uris = state.media,
                 )
             }
             Spacer(Modifier.weight(1f))
@@ -213,8 +227,11 @@ fun AddPost(
         }
         if (showBottomSheet.value) {
             PostOptionsBottomSheet(
+                onDateSelected = { postViewModel.handleIntent(PostIntent.UpdateDate(it))},
+                onTimeSelected = { postViewModel.handleIntent(PostIntent.UpdateTime(it))},
                 sheetState,
-                onDismiss = { showBottomSheet.value = false }
+                onDismiss = { showBottomSheet.value = false },
+                postViewModel
             )
         }
     }
@@ -222,36 +239,39 @@ fun AddPost(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit) {
+private fun PostOptionsBottomSheet(
+    onDateSelected: (LocalDate) -> Unit,
+    onTimeSelected: (LocalTime) -> Unit,
+    sheetState: SheetState,
+    onDismiss: () -> Unit,
+    postViewModel: PostViewModel
+) {
 
+    val state by postViewModel.state.collectAsState()
     var selectedOption by remember { mutableStateOf<String?>(null) }
-    var showDateTime by remember { mutableStateOf(false) }
-    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
-    var selectedTime by remember { mutableStateOf<LocalTime?>(null) }
-    var showDatePicker by remember { mutableStateOf(false) }
-    var showTimePicker by remember { mutableStateOf(false) }
 
-    if (showDatePicker){
+    if (state.showDatePicker){
         showDatePicker(
-            showDatePicker,
+            state.showDatePicker,
             onDateSelected = { date->
-                selectedDate = date
-                showDatePicker = false
+                onDateSelected(date)
+                postViewModel.handleIntent(PostIntent.ShowDatePicker(false))
             },
             onDismiss = {
-                showDatePicker = false
+                postViewModel.handleIntent(PostIntent.ShowDatePicker(false))
             },
         )
     }
-    if (showTimePicker){
+    if (state.showTimePicker){
         showTimePicker(
-            showTimePicker,
+            state.showTimePicker,
             onTimeSelected = { time->
-                selectedTime = time
-                showTimePicker = false
+                onTimeSelected(time)
+                postViewModel.handleIntent(PostIntent.ShowTimePicker(false))
+
             },
             onDismiss = {
-                showTimePicker = false
+                postViewModel.handleIntent(PostIntent.ShowTimePicker(false))
             },
         )
     }
@@ -298,7 +318,8 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                 isSelected = selectedOption == "Schedule",
                 onClick = {
                     selectedOption = "Schedule"
-                    showDateTime = true
+                    postViewModel.handleIntent(PostIntent.ShowDateTime(true))
+
                 }
             )
             if(selectedOption == "Schedule"){
@@ -327,10 +348,11 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                                 .fillMaxHeight()
                                 .padding(top = 6.dp)
                                 .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
-                            text = selectedDate?.toString() ?: "Pick Date",
+                            text = state.date?.toString() ?: "Pick Date",
                             icon = Resource.Icons.DATETIME_ICON,
                             onClick = {
-                                showDatePicker = true
+                                postViewModel.handleIntent(PostIntent.ShowDatePicker(true))
+
                             }
                         )
                     }
@@ -352,10 +374,10 @@ private fun PostOptionsBottomSheet(sheetState: SheetState, onDismiss: () -> Unit
                                 .fillMaxHeight()
                                 .padding(top = 6.dp)
                                 .background(shape = RoundedCornerShape(12.dp), color = AppColor.WhiteFade),
-                            text = selectedTime?.toString() ?: "Pick Time",
+                            text = state.time?.toString() ?: "Pick Time",
                             icon = Resource.Icons.DATETIME_ICON,
                             onClick = {
-                                showTimePicker = true
+                                postViewModel.handleIntent(PostIntent.ShowTimePicker(true))
                             }
                         )
                     }
