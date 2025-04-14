@@ -59,9 +59,7 @@ class PostViewModel(
             }
             return
         }
-
         updateState { copy(isLoading = true, error = null) }
-
         coroutineScope.launch {
             val postRequest = PostRequest(
                 postId = currentState.postId,
@@ -78,7 +76,6 @@ class PostViewModel(
 
             val result = repository.createPost(postRequest)
             updateState { copy(isLoading = false) }
-
             result
                 .onSuccess { createdPost ->
                     updateState { copy(isPostSubmitted = true) }
