@@ -22,6 +22,7 @@ class PostViewModel(
     private val repository: SocialMediaRepository,
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(PostState())
     val state: StateFlow<PostState> = _state.asStateFlow()
 
@@ -73,9 +74,9 @@ class PostViewModel(
                 updatedAt = Clock.System.now().toEpochMilliseconds(),
                 socials = currentState.socials
             )
-
             val result = repository.createPost(postRequest)
             updateState { copy(isLoading = false) }
+
             result
                 .onSuccess { createdPost ->
                     updateState { copy(isPostSubmitted = true) }
