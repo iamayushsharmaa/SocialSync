@@ -94,14 +94,12 @@ fun AddPost(
     val scope = rememberCoroutineScope()
     val context = LocalPlatformContext.current
 
-    var selectedMediaUris by remember { mutableStateOf<List<KmpFile>>(emptyList()) }
-
     val imagePickerLauncher = rememberFilePickerLauncher(
         type = FilePickerFileType.Image,
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
             scope.launch {
-                val media = uris.map { it.toString() }
+                val media = uris
                 postViewModel.handleIntent(PostIntent.AddMedia(media))
             }
         }
@@ -111,7 +109,7 @@ fun AddPost(
         selectionMode = FilePickerSelectionMode.Multiple,
         onResult = { uris ->
             scope.launch {
-                val media = uris.map { it.toString() }
+                val media = uris
                 postViewModel.handleIntent(PostIntent.AddMedia(media))
             }
         }
@@ -140,16 +138,16 @@ fun AddPost(
                 verticalAlignment = CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                SocialsDesign(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .defaultMinSize(100.dp)
-                        .height(60.dp)
-                        .padding(horizontal = 16.dp, vertical = 3.dp)
-                        .background(shape = RoundedCornerShape(18.dp), color = AppColor.White)
+                Text(
+                    "Add post",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 22.sp,
+                    color = AppColor.Black
                 )
+
             }
             Spacer(Modifier.height(6.dp))
+
             Text(
                 text = "Text",
                 fontSize = 18.sp,
@@ -181,9 +179,9 @@ fun AddPost(
                 }
             )
 
-            if (selectedMediaUris.isNotEmpty()) {
+            if (state.media.isNotEmpty()) {
                 Text(
-                    text = "Selected Media (${selectedMediaUris.size})",
+                    text = "Selected Media (${state.media.size})",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
@@ -197,13 +195,14 @@ fun AddPost(
                         .padding(top = 6.dp, start = 20.dp)
                 )
                 MediaLayout(
+                    uris = state.media,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(260.dp)
                         .padding(top = 16.dp)
                         .padding(horizontal = 20.dp),
                     imageLoader = imageLoader,
-                    uris = state.media,
+                    postViewModel
                 )
             }
             Spacer(Modifier.weight(1f))

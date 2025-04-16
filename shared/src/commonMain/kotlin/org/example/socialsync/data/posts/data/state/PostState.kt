@@ -1,5 +1,6 @@
 package org.example.socialsync.data.posts.data.state
 
+import com.mohamedrejeb.calf.io.KmpFile
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import org.example.socialsync.data.posts.data.request.PostStatus
@@ -9,7 +10,7 @@ data class PostState(
     val postId: String = "",
     val userId: String = "",
     val text: String = "",
-    val media: List<String> = emptyList(),
+    val media: List<KmpFile> = emptyList(),
     val date: LocalDate? = null,
     val time: LocalTime? = null,
     val status: PostStatus = PostStatus.DRAFT,
@@ -26,8 +27,8 @@ sealed class PostIntent {
     data class UpdatePostId(val postId: String) : PostIntent()
     data class UpdateUserId(val userId: String) : PostIntent()
     data class UpdateText(val text: String) : PostIntent()
-    data class AddMedia(val mediaUrl: List<String>) : PostIntent()
-    data class RemoveMedia(val mediaUrl: String) : PostIntent()
+    data class AddMedia(val mediaUrl: List<KmpFile>) : PostIntent()
+    data class RemoveMedia(val mediaUrl: KmpFile) : PostIntent()
     data class UpdateDate(val date: LocalDate?) : PostIntent()
     data class UpdateTime(val time: LocalTime?) : PostIntent()
     data class UpdateStatus(val status: PostStatus) : PostIntent()

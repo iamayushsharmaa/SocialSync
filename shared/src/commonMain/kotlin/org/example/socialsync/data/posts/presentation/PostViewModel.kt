@@ -1,6 +1,7 @@
 package org.example.socialsync.data.posts.presentation
 
 import androidx.lifecycle.ViewModel
+import com.mohamedrejeb.calf.io.KmpFile
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,6 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.update
 import org.example.socialsync.core.domain.onError
 import org.example.socialsync.core.domain.onSuccess
 import org.example.socialsync.data.posts.data.request.PostRequest

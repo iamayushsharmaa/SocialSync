@@ -51,6 +51,10 @@ kotlin {
             api(libs.permissions.gallery)
             api(libs.permissions.compose)
             implementation(libs.kotlinx.datetime)
+
+            implementation(libs.cmp.image.pick.n.crop)
+            implementation(libs.calf.file.picker)
+            implementation(libs.calf.file.picker.coil)
         }
 
         val jvmMain by getting {

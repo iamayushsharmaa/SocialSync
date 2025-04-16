@@ -9,7 +9,6 @@ import org.example.socialsync.data.posts.data.request.SocialAccount
 import org.example.socialsync.data.posts.data.request.SocialPlatform
 
 interface SocialMediaRepository {
-
     suspend fun getSocialAccounts(userId: String): Result<List<SocialAccount>, DataError.Remote>
     suspend fun createPost(post: PostRequest): Result<PostRequest, DataError.Remote>
     suspend fun updatePost(post: PostRequest): Result<PostRequest, DataError.Remote>
@@ -17,5 +16,4 @@ interface SocialMediaRepository {
     suspend fun publishPostNow(postId: String, platforms: List<SocialPlatform>) : Result<Unit, DataError.Remote>
     suspend fun deletePost(postId: String): Result<Unit, DataError.Remote>
     suspend fun saveDraft(post: PostRequest): PostRequest
-
 }

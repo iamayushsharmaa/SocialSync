@@ -23,6 +23,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +35,7 @@ import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import com.mohamedrejeb.calf.io.KmpFile
 import org.example.socialsync.app.AppColor
+import org.example.socialsync.data.posts.presentation.PostViewModel
 import org.example.socialsync.res.Resource
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -118,10 +121,14 @@ private fun ActionButton(
 
 @Composable
 fun MediaLayout(
-    uris: List<String>,
+    uris: List<KmpFile>,
     modifier: Modifier = Modifier,
-    imageLoader: ImageLoader
+    imageLoader: ImageLoader,
+    postViewModel: PostViewModel
 ) {
+
+    val state by postViewModel.state.collectAsState()
+
     LazyRow(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -162,7 +169,7 @@ fun MediaLayout(
 @Composable
 fun ImagePreview(
     modifier: Modifier = Modifier,
-    uri: String,
+    uri: KmpFile,
     imageLoader: ImageLoader
 ) {
     AsyncImage(
@@ -177,7 +184,7 @@ fun ImagePreview(
 @Composable
 fun VideoPreview(
     modifier: Modifier = Modifier,
-    uri: String,
+    uri: KmpFile,
     imageLoader: ImageLoader
 ) {
     Box(
